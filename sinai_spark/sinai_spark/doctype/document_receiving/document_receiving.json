@@ -1,0 +1,273 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:naming",
+ "creation": "2024-05-23 15:10:19.014587",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_gkzo",
+  "column_break_bybw",
+  "customer",
+  "remarks",
+  "column_break_sjbn",
+  "naming",
+  "status",
+  "amended_from",
+  "section_break_omqo",
+  "cf_status",
+  "column_break_xton",
+  "pe_status",
+  "so_status",
+  "section_break_rwvg",
+  "service_item",
+  "column_break_fquk",
+  "sales_order",
+  "document_expiry_section",
+  "document_expiry_details",
+  "section_break_ybxi",
+  "column_break_hizx",
+  "items",
+  "reference_details_section",
+  "business_proposal__id",
+  "party_type",
+  "column_break_dcsx",
+  "enquiry",
+  "company",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_gkzo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_bybw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_sjbn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nDocument Receiving & Review\nTo Advance Payment\nWork In Progress\nCompleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "mandatory_depends_on": "eval:doc.customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Document Receiving",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "business_proposal__id",
+   "fieldtype": "Link",
+   "label": "Business Proposal",
+   "options": "Business Proposal",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_omqo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "cf_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "CF Status",
+   "options": "Not Created\nCreated"
+  },
+  {
+   "fieldname": "column_break_xton",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pe_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "PE Status",
+   "options": "Not Created\nCreated",
+   "read_only": 1
+  },
+  {
+   "default": "Customer",
+   "fieldname": "party_type",
+   "fieldtype": "Data",
+   "label": "Party Type"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "section_break_rwvg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "service_item",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Service Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_fquk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "enquiry",
+   "fieldtype": "Link",
+   "label": "Enquiry",
+   "options": "Enquiry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming",
+   "fieldtype": "Data",
+   "label": "Series",
+   "unique": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "so_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "SO_Status",
+   "options": "Not Created\nCreated"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "mandatory_depends_on": "eval:doc.customer",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_ybxi",
+   "fieldtype": "Section Break",
+   "label": "Service Details"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Service Item",
+   "mandatory_depends_on": "eval:doc.customer",
+   "options": "Item Details DR"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "column_break_hizx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "sales_order",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Sales Order",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "reference_details_section",
+   "fieldtype": "Section Break",
+   "label": "Reference Details"
+  },
+  {
+   "fieldname": "column_break_dcsx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_expiry_section",
+   "fieldtype": "Section Break",
+   "label": "Document Expiry"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "document_expiry_details",
+   "fieldtype": "Table",
+   "label": "Document Expiry Details",
+   "options": "Document Expiry Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Sales Order",
+   "link_fieldname": "custom_document_receiving"
+  },
+  {
+   "link_doctype": "Company Formation",
+   "link_fieldname": "document_receiving"
+  }
+ ],
+ "modified": "2024-06-20 08:39:33.948469",
+ "modified_by": "Administrator",
+ "module": "Sinai Spark",
+ "name": "Document Receiving",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Pending"
+  },
+  {
+   "color": "Gray",
+   "title": "Document Receiving & Review"
+  },
+  {
+   "color": "Red",
+   "title": "To Advance Payment"
+  },
+  {
+   "color": "Orange",
+   "title": "Work In Progress"
+  },
+  {
+   "color": "Green",
+   "title": "Completed"
+  }
+ ]
+}

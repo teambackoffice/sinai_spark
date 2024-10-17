@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:ref_no",
+ "creation": "2024-05-23 15:01:11.015882",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_3biv",
+  "column_break_hcdy",
+  "customer",
+  "email_id",
+  "column_break_aort",
+  "ref_no",
+  "status",
+  "attn",
+  "scope_of_work_section",
+  "business_proposal_item",
+  "section_break_mrex",
+  "column_break_mtsh",
+  "remarks",
+  "column_break_eohr",
+  "total_amount",
+  "amended_from",
+  "reference_details_section",
+  "consultating",
+  "column_break_ezqe",
+  "enquiry",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3biv",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "column_break_hcdy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_aort",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ref_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ref. No",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "attn",
+   "fieldtype": "Data",
+   "label": "Attn."
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID"
+  },
+  {
+   "fieldname": "scope_of_work_section",
+   "fieldtype": "Section Break",
+   "label": "Scope of work"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "business_proposal_item",
+   "fieldtype": "Table",
+   "label": "Business Proposal",
+   "options": "Business Proposal Item"
+  },
+  {
+   "fieldname": "section_break_mrex",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_mtsh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eohr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Business Proposal",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nProposal Sent\nUnder Negotiation\nCompleted\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "consultating",
+   "fieldtype": "Link",
+   "label": "Consultating",
+   "options": "Consultanting",
+   "read_only": 1
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "enquiry",
+   "fieldtype": "Link",
+   "label": "Enquiry",
+   "options": "Enquiry",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "reference_details_section",
+   "fieldtype": "Section Break",
+   "label": "Reference Details"
+  },
+  {
+   "fieldname": "column_break_ezqe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Document Receiving",
+   "link_fieldname": "business_proposal__id"
+  }
+ ],
+ "modified": "2024-06-20 08:47:18.093195",
+ "modified_by": "Administrator",
+ "module": "Sinai Spark",
+ "name": "Business Proposal",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Gray",
+   "title": "Pending"
+  },
+  {
+   "color": "Blue",
+   "title": "Proposal Sent"
+  },
+  {
+   "color": "Orange",
+   "title": "Under Negotiation"
+  },
+  {
+   "color": "Green",
+   "title": "Completed"
+  },
+  {
+   "color": "Red",
+   "title": "Rejected"
+  }
+ ]
+}

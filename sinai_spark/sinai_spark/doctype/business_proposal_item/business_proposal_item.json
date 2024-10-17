@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-05-23 15:03:29.742000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "amount",
+  "column_break_spte",
+  "scope_of_work",
+  "uom",
+  "qty",
+  "item_name"
+ ],
+ "fields": [
+  {
+   "allow_on_submit": 1,
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_spte",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 6,
+   "fetch_from": "item.custom_scope_of_work",
+   "fieldname": "scope_of_work",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Scope of work"
+  },
+  {
+   "columns": 2,
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Service Code",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "item.stock_uom",
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "UOM"
+  },
+  {
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Qty"
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Item Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-06-27 23:09:27.054144",
+ "modified_by": "Administrator",
+ "module": "Sinai Spark",
+ "name": "Business Proposal Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,25 +1,10 @@
 app_name = "sinai_spark"
 app_title = "Sinai Spark"
 app_publisher = "sammish"
-app_description = "sinai_spark"
+app_description = "Lead Management"
 app_email = "sammish.thundiyil@gmail.com"
 app_license = "mit"
-
-# Apps
-# ------------------
-
 # required_apps = []
-
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "sinai_spark",
-# 		"logo": "/assets/sinai_spark/logo.png",
-# 		"title": "Sinai Spark",
-# 		"route": "/sinai_spark",
-# 		"has_permission": "sinai_spark.api.permission.has_app_permission"
-# 	}
-# ]
 
 # Includes in <head>
 # ------------------
@@ -137,13 +122,19 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Sales Order": {
+		# "on_update": "method",
+		"on_cancel": "sinai_spark.doc_events.sales_order.on_cancel_so",
+		# "on_trash": "method"
+	},
+    
+	"Sales Invoice": {
+		# "on_update": "method",
+		"on_cancel": "sinai_spark.doc_events.sales_invoice.on_cancel_so",
+		# "on_trash": "method"
+	},
+}
 
 # Scheduled Tasks
 # ---------------
@@ -242,3 +233,38 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+	{
+		"doctype": "Property Setter",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					# "Attendance Request-to_date-read_only",
+					# "Employee-employment_type-reqd",
+					
+				]
+			]
+		]
+	},
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+					"Payment Entry-custom_document_receiving",
+                    "Sales Invoice-custom_company_formation",
+                    "Item-custom_scope_of_work",
+                    "Sales Order-custom_document_receiving"
+                   
+
+
+
+				]
+			]
+		]
+	},
+]

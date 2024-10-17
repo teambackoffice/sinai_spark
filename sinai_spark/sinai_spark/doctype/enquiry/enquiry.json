@@ -1,0 +1,261 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:reference_no",
+ "creation": "2024-05-22 15:14:33.892007",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_dfse",
+  "column_break_ieca",
+  "service_code",
+  "column_break_akth",
+  "iata_code",
+  "column_break_mjyn",
+  "reference_no",
+  "section_break_a8oj",
+  "customer",
+  "nationality",
+  "scope",
+  "co",
+  "customer_company_name",
+  "column_break_yfyw",
+  "status",
+  "contact",
+  "e_mail_id",
+  "assigned_to",
+  "name1",
+  "amended_from",
+  "section_break_fwei",
+  "remarks",
+  "column_break_yfia",
+  "value",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_a8oj",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "column_break_yfyw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No",
+   "read_only": 1,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Link",
+   "label": "Nationality",
+   "options": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "e_mail_id",
+   "fieldtype": "Data",
+   "label": "E mail ID"
+  },
+  {
+   "fieldname": "scope",
+   "fieldtype": "Link",
+   "label": "Scope ",
+   "options": "Scope"
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Assigned to",
+   "options": "User"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Enquiry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "co",
+   "fieldtype": "Data",
+   "label": "C/o"
+  },
+  {
+   "fieldname": "section_break_fwei",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_yfia",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Currency",
+   "label": "Enquiry Value"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Enquiry Status",
+   "options": "Pending\nTo Consultant\nRejected\nHold\nClosed\nNo Response\nNeed Assistance\nJust Data Base\nConverted\nTo Proposal",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_code",
+   "fieldtype": "Link",
+   "label": "Service Code",
+   "options": "Service Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ieca",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "iata_code",
+   "fieldtype": "Link",
+   "label": "IATA Code",
+   "options": "IATA Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dfse",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_akth",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_mjyn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "assigned_to.full_name",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_company_name",
+   "fieldtype": "Data",
+   "label": "Customer Company Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Consultanting",
+   "link_fieldname": "enquiry"
+  }
+ ],
+ "modified": "2024-07-15 13:23:54.000388",
+ "modified_by": "Administrator",
+ "module": "Sinai Spark",
+ "name": "Enquiry",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Pending"
+  },
+  {
+   "color": "Gray",
+   "title": "To Consultant"
+  },
+  {
+   "color": "Red",
+   "title": "Rejected"
+  },
+  {
+   "color": "Yellow",
+   "title": "Hold"
+  },
+  {
+   "color": "Orange",
+   "title": "Closed"
+  },
+  {
+   "color": "Purple",
+   "title": "No Response"
+  },
+  {
+   "color": "Cyan",
+   "title": "Need Assistance"
+  },
+  {
+   "color": "Light Blue",
+   "title": "Just Data Base"
+  },
+  {
+   "color": "Green",
+   "title": "Converted"
+  },
+  {
+   "color": "Green",
+   "title": "To Proposal"
+  }
+ ]
+}

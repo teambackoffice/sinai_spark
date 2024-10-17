@@ -1,6 +1,6 @@
 ## Sinai Spark
 
-sinai_spark
+Lead Management
 
 #### License
 
