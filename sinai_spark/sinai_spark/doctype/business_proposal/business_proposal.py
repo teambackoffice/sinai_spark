@@ -151,7 +151,7 @@ def get_change(status, docname):
         if cok:
             frappe.db.sql("""
                 UPDATE `tabEnquiry`
-                SET status = 'To Proposal'
+                SET status = 'Converted'
                 WHERE name = %s
             """, (cok,))
         
