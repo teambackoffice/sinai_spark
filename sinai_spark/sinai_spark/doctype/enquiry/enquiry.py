@@ -52,3 +52,43 @@ def get_next_reference_no():
     # Format the next number to be 4 digits
     next_reference_no = f"{next_number:04d}"
     return next_reference_no
+
+# import frappe
+
+# @frappe.whitelist()
+# def get_status(status, docname):
+#     if status == "Proposal Sending":
+#         doc = frappe.get_doc("Consultanting", docname)
+        
+#         # Update Consultanting status if exists
+#         enq = doc.enquiry
+#         if enq:
+#             frappe.db.sql("""
+#                 UPDATE `tabEnquiry`
+#                 SET status = 'To Proposal'
+#                 WHERE name = %s
+#             """, (enq,))
+        
+       
+#     return False
+# # ////////////////////////////////////
+
+# import frappe
+
+# @frappe.whitelist()
+# def get_change(status, docname):
+#     if status != "Proposal Sending":
+#         doc = frappe.get_doc("Consultanting", docname)
+        
+#         # Update Consultanting status if exists
+#         enq = doc.enquiry
+#         if enq:
+#             frappe.db.sql("""
+#                 UPDATE `tabEnquiry`
+#                 SET status = 'To Consultant'
+#                 WHERE name = %s
+#             """, (enq,))
+        
+      
+            
+#     return False

@@ -23,7 +23,6 @@
   "total_amount",
   "amended_from",
   "reference_details_section",
-  "consultating",
   "column_break_ezqe",
   "enquiry",
   "connections_tab"
@@ -110,13 +109,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "consultating",
-   "fieldtype": "Link",
-   "label": "Consultating",
-   "options": "Consultanting",
-   "read_only": 1
-  },
-  {
    "fieldname": "connections_tab",
    "fieldtype": "Tab Break",
    "label": "Connections",
@@ -132,8 +124,7 @@
    "fieldname": "enquiry",
    "fieldtype": "Link",
    "label": "Enquiry",
-   "options": "Enquiry",
-   "read_only": 1
+   "options": "Enquiry"
   },
   {
    "collapsible": 1,
@@ -159,7 +150,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2024-06-20 08:47:18.093195",
+ "modified": "2024-10-22 17:02:45.819473",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",

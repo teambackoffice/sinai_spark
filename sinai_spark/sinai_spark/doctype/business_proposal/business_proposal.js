@@ -81,9 +81,8 @@ function change(frm) {
     var status = frm.doc.status;
     console.log("Status:", status);
 
-    if (status === "Completed"|| "Proposal Sent") {
-        console.log("2222222222222222222222222222");
-
+    if (status === "Completed"|| "Proposal Sending") {
+        
         frappe.call({
             method: "sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_status",
             args: {
@@ -102,8 +101,7 @@ function change(frm) {
         });
     }
     if (status === "Pending" || "Under Negotiation" || "Rejected") {
-        console.log("reject");
-
+        
         frappe.call({
             method: "sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_change",
             args: {

@@ -26,6 +26,8 @@
   "assigned_to",
   "name1",
   "amended_from",
+  "consultant_name",
+  "consultant_remarks",
   "section_break_fwei",
   "remarks",
   "column_break_yfia",
@@ -126,7 +128,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Enquiry Status",
-   "options": "Pending\nTo Consultant\nRejected\nHold\nClosed\nNo Response\nNeed Assistance\nJust Data Base\nConverted\nTo Proposal",
+   "options": "Pending\nTo Consultant\nRejected\nHold\nClosed\nNo Response\nProposal Sending\nNeed Assistance\nJust Data Base\nConverted\nTo Proposal\nMeeting On Going\nMeeting Done\nCompleted",
    "read_only": 1,
    "reqd": 1
   },
@@ -179,17 +181,27 @@
    "fieldname": "customer_company_name",
    "fieldtype": "Data",
    "label": "Customer Company Name"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.status == \"To Consultant\"",
+   "fieldname": "consultant_name",
+   "fieldtype": "Link",
+   "label": "Consultant Name",
+   "options": "Consultant Name"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.status == \"To Consultant\"",
+   "fieldname": "consultant_remarks",
+   "fieldtype": "Small Text",
+   "label": "Consultant Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Consultanting",
-   "link_fieldname": "enquiry"
-  }
- ],
- "modified": "2024-07-15 13:23:54.000388",
+ "links": [],
+ "modified": "2024-10-22 12:38:05.135107",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
@@ -256,6 +268,22 @@
   {
    "color": "Green",
    "title": "To Proposal"
+  },
+  {
+   "color": "Green",
+   "title": "Meeting On Going"
+  },
+  {
+   "color": "Green",
+   "title": "Meeting Done"
+  },
+  {
+   "color": "Yellow",
+   "title": "Proposal Sending"
+  },
+  {
+   "color": "Green",
+   "title": "Completed"
   }
  ]
 }
