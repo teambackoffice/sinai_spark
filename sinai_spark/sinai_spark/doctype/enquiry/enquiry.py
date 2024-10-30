@@ -33,23 +33,27 @@ class Enquiry(Document):
 import frappe
 
 @frappe.whitelist()
-def get_next_reference_no():
-    # Query to find the highest existing reference_no
-    last_reference = frappe.db.sql("""
+def get_next_reference_no(service_code, iata_code):
+    # Define the prefix based on service_code and iata_code
+    prefix = f"{service_code}{iata_code}"
+
+    # Query to find all reference_no with the same prefix, ordered by the numeric suffix descending
+    last_reference = frappe.db.sql(f"""
         SELECT reference_no FROM `tabEnquiry`
-        ORDER BY CAST(reference_no AS UNSIGNED) DESC
+        WHERE reference_no LIKE '{prefix}%'
+        ORDER BY reference_no DESC
         LIMIT 1
     """)
-    
-    if last_reference and last_reference[0][0].isdigit():
-        # Extract the numeric part of the last reference_no and increment it
-        last_number = int(last_reference[0][0])
+
+    if last_reference:
+        # Extract the numeric suffix from the last matching reference_no and increment it
+        last_number = int(last_reference[0][0][-4:])
         next_number = last_number + 1
     else:
-        # Start from 1 if no valid reference_no is found
+        # Start with 1 if no reference_no exists with the same prefix
         next_number = 1
 
-    # Format the next number to be 4 digits (e.g., 0003)
+    # Format the next number to be 4 digits with leading zeros (e.g., 0001, 0002)
     next_reference_no = f"{next_number:04d}"
     return next_reference_no
 

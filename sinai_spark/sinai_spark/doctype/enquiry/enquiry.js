@@ -333,13 +333,11 @@ function set_reference_no(frm) {
     var service_code = frm.doc.service_code;
     var iata_code = frm.doc.iata_code;
 
-    if(service_code && iata_code) {
+    if (service_code && iata_code) {
         // Call the server-side method to get the next reference_no
         frappe.call({
             method: "sinai_spark.sinai_spark.doctype.enquiry.enquiry.get_next_reference_no",
-            // method: "prago_tech.prago_tech.doctype.daily_work_record.daily_work_record.get_ss",
-
-            args: {},
+            args: { service_code: service_code, iata_code: iata_code },
             callback: function(r) {
                 if (r.message) {
                     var next_number = r.message;
@@ -350,3 +348,4 @@ function set_reference_no(frm) {
         });
     }
 }
+
