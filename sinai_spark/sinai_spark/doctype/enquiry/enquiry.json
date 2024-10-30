@@ -201,7 +201,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-22 12:38:05.135107",
+ "modified": "2024-10-30 15:44:33.600484",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
@@ -227,7 +227,7 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_order": "ASC",
  "states": [
   {
    "color": "Blue",
