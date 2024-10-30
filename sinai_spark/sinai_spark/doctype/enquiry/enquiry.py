@@ -34,28 +34,25 @@ import frappe
 
 @frappe.whitelist()
 def get_next_reference_no(service_code, iata_code):
-    # Define the prefix based on service_code and iata_code
-    prefix = f"{service_code}{iata_code}"
-
-    # Query to find all reference_no with the same prefix, ordered by the numeric suffix descending
-    last_reference = frappe.db.sql(f"""
+    # Query to find the highest numeric suffix across all reference_no
+    last_reference = frappe.db.sql("""
         SELECT reference_no FROM `tabEnquiry`
-        WHERE reference_no LIKE '{prefix}%'
-        ORDER BY reference_no DESC
+        ORDER BY CAST(SUBSTRING(reference_no, -4) AS UNSIGNED) DESC
         LIMIT 1
     """)
 
     if last_reference:
-        # Extract the numeric suffix from the last matching reference_no and increment it
+        # Extract the numeric suffix from the last global reference_no and increment it
         last_number = int(last_reference[0][0][-4:])
         next_number = last_number + 1
     else:
-        # Start with 1 if no reference_no exists with the same prefix
+        # Start with 1 if no reference_no exists at all
         next_number = 1
 
     # Format the next number to be 4 digits with leading zeros (e.g., 0001, 0002)
     next_reference_no = f"{next_number:04d}"
     return next_reference_no
+
 
 
 # import frappe
