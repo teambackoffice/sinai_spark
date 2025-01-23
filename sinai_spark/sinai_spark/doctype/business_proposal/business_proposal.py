@@ -6,19 +6,17 @@ from frappe.model.document import Document
  
 class BusinessProposal(Document):
     def on_cancel(self):
-             if self.enquiry:
-                                
-                                
-                                frappe.db.sql("""UPDATE `tabEnquiry` SET status = 'To Consultant' WHERE name = %s""", self.enquiry)
-                                
-                                frappe.db.commit()
-                                self.reload()
+            if self.enquiry:
+                                            
+                frappe.db.sql("""UPDATE `tabEnquiry` SET status = 'To Consultant' WHERE name = %s""", self.enquiry)
+                frappe.db.commit()
+                self.reload()
 
-             if self.consultating:
-                  frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", self.consultating)
-                               
-                  frappe.db.commit()
-                  self.reload()
+            if self.consultating:
+                frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", self.consultating)
+                            
+                frappe.db.commit()
+                self.reload()
                   
                   
 # 	@frappe.whitelist()
@@ -98,28 +96,20 @@ import frappe
 def get_status(status, docname):
     if status == "Completed":
         doc = frappe.get_doc("Business Proposal", docname)
-        
-        # Update Consultanting status if exists
-        enq = doc.consultating
-        if enq:
-            frappe.db.sql("""
-                UPDATE `tabConsultanting`
-                SET status = 'Completed'
-                WHERE name = %s
-            """, (enq,))
-        
-        # Update Enquiry status if exists
+
         cok = doc.enquiry
         if cok:
             frappe.db.sql("""
                 UPDATE `tabEnquiry`
-                SET status = 'Converted'
+                SET status = 'Completed'
                 WHERE name = %s
             """, (cok,))
         
         # Commit the changes to the database
         frappe.db.commit()
         return True
+
+    
         
     elif status == "Proposal Sent":
         doc = frappe.get_doc("Business Proposal", docname)
@@ -144,24 +134,24 @@ import frappe
 
 @frappe.whitelist()
 def get_change(status, docname):
-    if status not in ["Completed", "Proposal Sent"]:
+    if status == "Pending":
         doc = frappe.get_doc("Business Proposal", docname)
         
         # Update Consultanting status if exists
-        enq = doc.consultating
-        if enq:
-            frappe.db.sql("""
-                UPDATE `tabConsultanting`
-                SET status = 'Proposal Sending'
-                WHERE name = %s
-            """, (enq,))
+        # enq = doc.consultating
+        # if enq:
+        #     frappe.db.sql("""
+        #         UPDATE `tabConsultanting`
+        #         SET status = 'Proposal Sending'
+        #         WHERE name = %s
+        #     """, (enq,))
         
         # Update Enquiry status if exists
         cok = doc.enquiry
         if cok:
             frappe.db.sql("""
                 UPDATE `tabEnquiry`
-                SET status = 'To Consultant'
+                SET status = 'Converted'
                 WHERE name = %s
             """, (cok,))
         

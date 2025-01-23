@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"j3N0g1H1_4\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Sinai Spark</span>\",\"col\":12}},{\"id\":\"x-VZ6mdqhR\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enquiry\",\"col\":3}},{\"id\":\"GWms2T2ms2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Consultanting\",\"col\":3}},{\"id\":\"Aw_94BtifH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Business Proposal\",\"col\":3}},{\"id\":\"fGLJ1c71Kh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Document Receiving\",\"col\":3}},{\"id\":\"sCeUeeJYXt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company Formation\",\"col\":3}},{\"id\":\"FIfY7tRo5o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":3}},{\"id\":\"J3f5s3yLDk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}}]",
+ "content": "[{\"id\":\"j3N0g1H1_4\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Sinai Spark</span>\",\"col\":12}},{\"id\":\"x-VZ6mdqhR\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enquiry\",\"col\":3}},{\"id\":\"Aw_94BtifH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Business Proposal\",\"col\":3}},{\"id\":\"fGLJ1c71Kh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Document Receiving\",\"col\":3}},{\"id\":\"sCeUeeJYXt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company Formation\",\"col\":3}},{\"id\":\"FIfY7tRo5o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":3}},{\"id\":\"J3f5s3yLDk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}}]",
  "creation": "2024-05-23 15:31:07.740166",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Sinai Spark",
  "links": [],
- "modified": "2024-05-27 10:29:43.800535",
+ "modified": "2024-10-22 17:14:16.238480",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Sinai Spark",
@@ -38,14 +38,6 @@
    "doc_view": "List",
    "label": "Company Formation",
    "link_to": "Company Formation",
-   "stats_filter": "[]",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Consultanting",
-   "link_to": "Consultanting",
    "stats_filter": "[]",
    "type": "DocType"
   },
