@@ -6,8 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_gkzo",
-  "column_break_bybw",
+  "details_tab",
   "customer",
   "remarks",
   "column_break_sjbn",
@@ -37,14 +36,6 @@
   "connections_tab"
  ],
  "fields": [
-  {
-   "fieldname": "section_break_gkzo",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_bybw",
-   "fieldtype": "Column Break"
-  },
   {
    "fieldname": "column_break_sjbn",
    "fieldtype": "Column Break"
@@ -211,21 +202,17 @@
    "fieldtype": "Table",
    "label": "Document Expiry Details",
    "options": "Document Expiry Details"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Sales Order",
-   "link_fieldname": "custom_document_receiving"
-  },
-  {
-   "link_doctype": "Company Formation",
-   "link_fieldname": "document_receiving"
-  }
- ],
- "modified": "2024-06-20 08:39:33.948469",
+ "links": [],
+ "modified": "2025-01-23 15:24:25.547253",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Document Receiving",

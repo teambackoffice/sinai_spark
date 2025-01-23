@@ -25,6 +25,7 @@
   "reference_details_section",
   "column_break_ezqe",
   "enquiry",
+  "column_break_skqx",
   "connections_tab"
  ],
  "fields": [
@@ -140,6 +141,10 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_skqx",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -150,7 +155,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2024-10-22 17:02:45.819473",
+ "modified": "2025-01-23 16:01:50.930166",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
