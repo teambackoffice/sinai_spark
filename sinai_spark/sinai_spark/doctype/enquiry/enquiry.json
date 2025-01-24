@@ -32,8 +32,6 @@
   "remarks",
   "column_break_yfia",
   "value",
-  "section_break_xmzg",
-  "attachments",
   "connections_tab"
  ],
  "fields": [
@@ -198,27 +196,12 @@
    "fieldname": "consultant_remarks",
    "fieldtype": "Small Text",
    "label": "Consultant Remarks"
-  },
-  {
-   "fieldname": "section_break_xmzg",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "attachments",
-   "fieldtype": "Table",
-   "label": "Attachments",
-   "options": "Attachments"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Business Proposal",
-   "link_fieldname": "enquiry"
-  }
- ],
- "modified": "2025-01-23 10:54:53.008964",
+ "links": [],
+ "modified": "2024-10-30 15:44:33.600484",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
