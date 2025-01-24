@@ -211,3 +211,37 @@ def get_change(status, docname):
 #     # Commit the changes to the database
 #     frappe.db.commit()
 #     return True
+
+@frappe.whitelist()
+def send_mail_to_hr(docname):
+    try:
+        # Fetch the document
+        doc = frappe.get_doc("Business Proposal", docname)
+
+        # Fetch HR email(s) from Has Role
+        role = frappe.db.get_value("Sinai Spark Settings", None, "role")
+
+        if not role:
+            return frappe.throw("No HR Manager's email found in the system.")
+
+        # Email details
+        subject = f"Business Proposal {doc.name} is Under Negotiation"
+        message = f"""
+            Hello Team,<br><br>
+            The business proposal <b>{doc.name}</b> has been moved to the status <b>Under Negotiation</b>.<br>
+            Please review the details and take necessary action.<br><br>
+            Regards,<br>
+            System Notification
+        """
+
+        # Send email
+        frappe.sendmail(
+            recipients=role,
+            subject=subject,
+            message=message,
+        )
+        return "success"
+
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Business Proposal Email Error")
+        return "error"
