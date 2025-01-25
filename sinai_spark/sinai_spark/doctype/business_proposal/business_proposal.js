@@ -70,7 +70,7 @@ frappe.ui.form.on("Business Proposal", {
     status: function(frm) {
         if (frm.doc.status === "Under Negotiation") {
             frappe.confirm(
-                'The status is set to "Under Negotiation". Do you want to notify HR?',
+                'The status is set to "Under Negotiation". Do you want to Send E-mail?',
                 function() {
                     // User confirmed, proceed to send the email
                     frappe.call({
