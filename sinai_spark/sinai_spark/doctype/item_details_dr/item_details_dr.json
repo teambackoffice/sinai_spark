@@ -13,7 +13,8 @@
   "rate",
   "conversion_factor",
   "column_break_jwrc",
-  "sales_order"
+  "sales_order",
+  "attach"
  ],
  "fields": [
   {
@@ -69,12 +70,17 @@
    "fieldname": "sales_order",
    "fieldtype": "Data",
    "label": "Sales Order"
+  },
+  {
+   "fieldname": "attach",
+   "fieldtype": "Attach",
+   "label": "Attach"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-27 22:51:24.711140",
+ "modified": "2025-01-25 14:47:57.708138",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Item Details DR",

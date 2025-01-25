@@ -32,6 +32,8 @@
   "remarks",
   "column_break_yfia",
   "value",
+  "attachments_section",
+  "attach",
   "connections_tab"
  ],
  "fields": [
@@ -196,12 +198,23 @@
    "fieldname": "consultant_remarks",
    "fieldtype": "Small Text",
    "label": "Consultant Remarks"
+  },
+  {
+   "fieldname": "attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "attach",
+   "fieldtype": "Table",
+   "label": "Attach",
+   "options": "Attachments"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-30 15:44:33.600484",
+ "modified": "2025-01-25 14:46:39.043168",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",

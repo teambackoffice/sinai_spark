@@ -61,7 +61,6 @@ frappe.ui.form.on("Enquiry", {
             //     frm.page.clear_secondary_action();
             // }
             
-         
 
         } else {
             // Remove the custom button if the document is new
