@@ -68,54 +68,58 @@ frappe.ui.form.on("Enquiry", {
             frm.page.clear_secondary_action();
         }
         
-
-        if (frm.doc.docstatus ==1) {
-            
-            
-
-            if(frm.doc.status != "Converted" || "Meeting On Going" || "Meeting Done" || "Proposal Sending" || "Completed")   {
-
-                frm.add_custom_button(__('Pending'), function() {
-                    frm.set_value('status', 'Pending');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('To Consultant'), function() {
-                    frm.set_value('status', 'To Consultant');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('Rejected'), function() {
-                    frm.set_value('status', 'Rejected');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('Hold'), function() {
-                    frm.set_value('status', 'Hold');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('Closed'), function() {
-                    frm.set_value('status', 'Closed');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('No Response'), function() {
-                    frm.set_value('status', 'No Response');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('Need Assistance'), function() {
-                    frm.set_value('status', 'Need Assistance');
-                }, __("Change Status"));
-                
-                frm.add_custom_button(__('Just Data Base'), function() {
-                    frm.set_value('status', 'Just Data Base');
-                }, __("Change Status"));
-                
-                // frm.add_custom_button(__('Converted'), function() {
-                //     frm.set_value('status', 'Converted');
-                // }, __("Change Status"));
-                
-                // frm.add_custom_button(__('To Proposal'), function() {
-                //     frm.set_value('status', 'To Proposal');
-                // }, __("Change Status"));
+        if (frm.doc.docstatus == 1) {
+            if (
+                frm.doc.status != "Converted" &&
+                frm.doc.status != "Meeting On Going" &&
+                frm.doc.status != "Meeting Done" &&
+                frm.doc.status != "Proposal Sending" &&
+                frm.doc.status != "Completed"
+            ) {
+                const statuses = [
+                    { label: "Pending", value: "Pending" },
+                    { label: "To Consultant", value: "To Consultant" },
+                    { label: "Rejected", value: "Rejected" },
+                    { label: "Hold", value: "Hold" },
+                    { label: "Closed", value: "Closed" },
+                    { label: "No Response", value: "No Response" },
+                    { label: "Need Assistance", value: "Need Assistance" },
+                    { label: "Just Data Base", value: "Just Data Base" },
+                ];
+        
+                statuses.forEach((status) => {
+                    const button = frm.add_custom_button(
+                        __(status.label),
+                        function () {
+                            if (frm.doc.status !== status.value) {
+                                frm.set_value("status", status.value);
+                                frm.save();
+                                // Add a class to indicate the button is permanently styled
+                                button.addClass("status-changed");
+                                button.css({
+                                    "background-color": "#ffffff",
+                                    color: "#8b8b8c",
+                                });
+                            }
+                        },
+                        __("Change Status")
+                    );
+        
+                    // Apply permanent styling if the button already matches the status
+                    if (frm.doc.status === status.value) {
+                        button.addClass("status-changed");
+                        button.css({
+                            "background-color": "#ffffff",
+                            color: "#8b8b8c",
+                        });
+                    }
+                });
             }
-         }
+        }
+        
+        
+         
+         
         if (frm.doc.status === "Converted"){
            
             
