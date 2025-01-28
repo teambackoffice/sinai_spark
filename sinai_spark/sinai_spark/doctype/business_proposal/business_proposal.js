@@ -66,10 +66,129 @@ frappe.ui.form.on("Business Proposal", {
             });
         }, __("Change Status"));
         
-
-
-
     },
+    status: function(frm) {
+        if (frm.doc.status === "Under Negotiation") {
+            frappe.confirm(
+                'The status is set to "Under Negotiation". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                    
+                }
+            );
+        }
+        else if (frm.doc.status === "Pending") {
+            frappe.confirm(
+                'The status is set to "Pending". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                    
+                }
+            );
+        }
+        else if (frm.doc.status === "Proposal Sent") {
+            frappe.confirm(
+                'The status is set to "Proposal Sent". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                    
+                }
+            );
+        }
+        else if (frm.doc.status === "Completed") {
+            frappe.confirm(
+                'The status is set to "Completed". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                    
+                }
+            );
+        }
+        else if (frm.doc.status === "Rejected") {
+            frappe.confirm(
+                'The status is set to "Rejected". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                    
+                }
+            );
+        }
+    }
    
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,6 +290,3 @@ frappe.ui.form.on("Business Proposal Item","business_proposal_item_remove",funct
 	frm.refresh_field("total_amount")
 	
 });
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
