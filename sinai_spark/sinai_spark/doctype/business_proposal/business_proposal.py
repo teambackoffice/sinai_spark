@@ -225,14 +225,51 @@ def send_mail_to_hr(docname):
             return frappe.throw("No HR Manager's email found in the system.")
 
         # Email details
-        subject = f"Business Proposal {doc.name} is Under Negotiation"
-        message = f"""
-            Hello Team,<br><br>
-            The business proposal <b>{doc.name}</b> has been moved to the status <b>Under Negotiation</b>.<br>
-            Please review the details and take necessary action.<br><br>
-            Regards,<br>
-            System Notification
-        """
+        if doc.status == "Under Negotiation":
+            subject = f"Business Proposal {doc.name} is Under Negotiation"
+            message = f"""
+                Hello Team,<br><br>
+                The business proposal <b>{doc.name}</b> has been moved to the status <b>Under Negotiation</b>.<br>
+                Please review the details and take necessary action.<br><br>
+                Regards,<br>
+                System Notification
+            """
+        elif doc.status == "Pending":
+            subject = f"Business Proposal {doc.name} is Pending"
+            message = f"""
+                Hello Team,<br><br>
+                The business proposal <b>{doc.name}</b> has been moved to the status <b>Pending</b>.<br>
+                Please review the details and take necessary action.<br><br>
+                Regards,<br>
+                System Notification
+            """
+        elif doc.status == "Proposal Sent":
+            subject = f"Business Proposal {doc.name} is Proposal Sent"
+            message = f"""
+                Hello Team,<br><br>
+                The business proposal <b>{doc.name}</b> has been moved to the status <b>Proposal Sent</b>.<br>
+                Please review the details and take necessary action.<br><br>
+                Regards,<br>
+                System Notification
+            """
+        elif doc.status == "Completed":
+            subject = f"Business Proposal {doc.name} is Completed"
+            message = f"""
+                Hello Team,<br><br>
+                The business proposal <b>{doc.name}</b> has been moved to the status <b>Completed</b>.<br>
+                Please review the details and take necessary action.<br><br>
+                Regards,<br>
+                System Notification
+            """
+        elif doc.status == "Rejected":
+            subject = f"Business Proposal {doc.name} is Rejected"
+            message = f"""
+                Hello Team,<br><br>
+                The business proposal <b>{doc.name}</b> has been moved to the status <b>Rejected</b>.<br>
+                Please review the details and take necessary action.<br><br>
+                Regards,<br>
+                System Notification
+            """
 
         # Send email
         frappe.sendmail(
