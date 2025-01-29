@@ -265,6 +265,192 @@ frappe.ui.form.on("Enquiry", {
     iata_code: function(frm) {
         set_reference_no(frm);
     },
+    status: function(frm) {
+        if (frm.doc.status === "Pending") {
+            frappe.confirm(
+                'The status is set to "Pending". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() { 
+                }
+            );
+        }
+        else if (frm.doc.status === "To Consultant") {
+            frappe.confirm(
+                'The status is set to "To Consultant". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {  
+                }
+            );
+        }
+        else if (frm.doc.status === "Rejected") {
+            frappe.confirm(
+                'The status is set to "Rejected". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {  
+                }
+            );
+        }
+        else if (frm.doc.status === "Hold") {
+            frappe.confirm(
+                'The status is set to "Hold". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                }
+            );
+        }
+        else if (frm.doc.status === "Closed") {
+            frappe.confirm(
+                'The status is set to "Closed". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                }
+            );
+        }
+        else if (frm.doc.status === "Need Assistance") {
+            frappe.confirm(
+                'The status is set to "Need Assistance". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {  
+                }
+            );
+        }
+        else if (frm.doc.status === "No Response") {
+            frappe.confirm(
+                'The status is set to "No Response". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                }
+            );
+        }
+        else if (frm.doc.status === "Just Data Base") {
+            frappe.confirm(
+                'The status is set to "Just Data Base". Do you want to Send E-mail?',
+                function() {
+                    // User confirmed, proceed to send the email
+                    frappe.call({
+                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
+                        args: {
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            if (response.message === 'success') {
+                                frappe.msgprint(__('Email sent to HR successfully.'));
+                            } else {
+                                frappe.msgprint(__('Failed to send email. Please try again.'));
+                            }
+                        }
+                    });
+                },
+                function() {
+                }
+            );
+        }
+    }
 
     // onload:function(frm){
         // if (frm.doc.status === "Proposal Sending") {
