@@ -126,7 +126,8 @@ frappe.ui.form.on("Enquiry", {
         if (frm.doc.docstatus == 1) {
             const statuses = [
                 "Pending", "To Consultant", "Rejected", "Hold",
-                "Closed", "No Response", "Need Assistance", "Just Data Base"
+                "Closed", "No Response", "Need Assistance", "Just Data Base", "Converted",
+                "Meeting On Going", "Meeting Done", "Proposal Sending", "Completed"
             ];
         
             let buttons = {};
