@@ -67,58 +67,217 @@ frappe.ui.form.on("Enquiry", {
             frm.page.clear_secondary_action();
         }
         
+        
+        // if (frm.doc.docstatus == 1) {
+        //     if (
+        //         frm.doc.status != "Converted" &&
+        //         frm.doc.status != "Meeting On Going" &&
+        //         frm.doc.status != "Meeting Done" &&
+        //         frm.doc.status != "Proposal Sending" &&
+        //         frm.doc.status != "Completed"
+        //     ) {
+        //         const statuses = [
+        //             { label: "Pending", value: "Pending" },
+        //             { label: "To Consultant", value: "To Consultant" },
+        //             { label: "Rejected", value: "Rejected" },
+        //             { label: "Hold", value: "Hold" },
+        //             { label: "Closed", value: "Closed" },
+        //             { label: "No Response", value: "No Response" },
+        //             { label: "Need Assistance", value: "Need Assistance" },
+        //             { label: "Just Data Base", value: "Just Data Base" },
+        //         ];
+        
+        //         statuses.forEach((status) => {
+        //             const button = frm.add_custom_button(
+        //                 __(status.label),
+        //                 function () {
+                            
+        //                     if (frm.doc.status !== status.value) {
+        //                         frm.set_value("status", status.value);
+        //                         frm.save();
+        //                         // Add a class to indicate the button is permanently styled
+        //                         button.addClass("status-changed");
+        //                         button.css({
+        //                             "background-color": "#ffffff",
+        //                             color: "#ed1909",
+        //                         });
+        //                     }
+        //                 },
+        //                 __("Change Status")
+        //             );
+        
+        //             // Apply permanent styling if the button already matches the status
+        //             if (frm.doc.status === status.value) {
+        //                 button.addClass("status-changed");
+        //                 button.css({
+        //                     "background-color": "#ffffff",
+        //                     color: "#28a745",
+        //                 });
+        //             }
+        //         });
+        //     }
+        // }
+        
+         
+
+
+
+
         if (frm.doc.docstatus == 1) {
-            if (
-                frm.doc.status != "Converted" &&
-                frm.doc.status != "Meeting On Going" &&
-                frm.doc.status != "Meeting Done" &&
-                frm.doc.status != "Proposal Sending" &&
-                frm.doc.status != "Completed"
-            ) {
-                const statuses = [
-                    { label: "Pending", value: "Pending" },
-                    { label: "To Consultant", value: "To Consultant" },
-                    { label: "Rejected", value: "Rejected" },
-                    { label: "Hold", value: "Hold" },
-                    { label: "Closed", value: "Closed" },
-                    { label: "No Response", value: "No Response" },
-                    { label: "Need Assistance", value: "Need Assistance" },
-                    { label: "Just Data Base", value: "Just Data Base" },
-                ];
+            const statuses = [
+                { label: "Pending", value: "Pending" },
+                { label: "To Consultant", value: "To Consultant" },
+                { label: "Rejected", value: "Rejected" },
+                { label: "Hold", value: "Hold" },
+                { label: "Closed", value: "Closed" },
+                { label: "No Response", value: "No Response" },
+                { label: "Need Assistance", value: "Need Assistance" },
+                { label: "Just Data Base", value: "Just Data Base" },
+            ];
         
+            // Iterate through the statuses
+            statuses.forEach((status) => {
+                const button = frm.add_custom_button(
+                    __(status.label),
+                    function () {
+                        // On button click, update the status and save
+                        frm.set_value("status", status.value);
+                        frm.save();
+                        updateButtonColors();
+                    },
+                    __("Change Status")
+                );
+        
+                // Apply initial colors based on the current status
+                if (frm.doc.status === "Pending") {
+                    button.css({
+                        color: "#007bff", // Blue for Pending
+                    });
+                } else if (frm.doc.status === status.value) {
+                    button.css({
+                        color: "#28a745", // Green for submitted statuses
+                    });
+                } else {
+                    button.css({
+                        color: "#dc3545", // Red for other statuses
+                    });
+                }
+            });
+        
+            // Function to update button colors dynamically
+            function updateButtonColors() {
                 statuses.forEach((status) => {
-                    const button = frm.add_custom_button(
-                        __(status.label),
-                        function () {
-                            if (frm.doc.status !== status.value) {
-                                frm.set_value("status", status.value);
-                                frm.save();
-                                // Add a class to indicate the button is permanently styled
-                                button.addClass("status-changed");
-                                button.css({
-                                    "background-color": "#ffffff",
-                                    color: "#8b8b8c",
-                                });
-                            }
-                        },
-                        __("Change Status")
-                    );
-        
-                    // Apply permanent styling if the button already matches the status
+                    const buttonElement = $(`.custom-actions button:contains('${status.label}')`);
                     if (frm.doc.status === status.value) {
-                        button.addClass("status-changed");
-                        button.css({
-                            "background-color": "#ffffff",
-                            color: "#8b8b8c",
+                        buttonElement.css({
+                            color: "#28a745", // Green for submitted statuses
+                        });
+                    } else {
+                        buttonElement.css({
+                            color: "#dc3545", // Red for other statuses
                         });
                     }
                 });
             }
         }
+        // if (frm.doc.docstatus == 1) {
+        //     // Initialize the statuses array with possible statuses
+        //     const statuses = [
+        //         { label: "Pending", value: "Pending" },
+        //         { label: "To Consultant", value: "To Consultant" },
+        //         { label: "Rejected", value: "Rejected" },
+        //         { label: "Hold", value: "Hold" },
+        //         { label: "Closed", value: "Closed" },
+        //         { label: "No Response", value: "No Response" },
+        //         { label: "Need Assistance", value: "Need Assistance" },
+        //         { label: "Just Data Base", value: "Just Data Base" },
+        //     ];
+        
+        //     // Initialize an array to track submitted statuses
+        //     let submittedStatuses = [];
+        
+        //     // Function to update button colors dynamically
+        //     function updateButtonColors() {
+        //         statuses.forEach((status) => {
+        //             // Use a more specific selector to target the buttons
+        //             const buttonElement = $(`button[data-status='${status.value}']`);
+        
+        //             // Check if the status is in submittedStatuses array
+        //             if (submittedStatuses.includes(status.value)) {
+        //                 console.log("Status in submittedStatuses: " + status.label);
+        //                 // Apply green color if the status is submitted
+        //                 buttonElement.css({
+        //                     backgroundColor: "#28a745", // Green for submitted statuses
+        //                     color: "white" // White text for visibility
+        //                 });
+        //             } else {
+        //                 console.log("Status NOT in submittedStatuses: " + status.label);
+        //                 // Apply blue color if the status is not submitted
+        //                 buttonElement.css({
+        //                     backgroundColor: "#007bff", // Blue for remaining statuses
+        //                     color: "white" // White text for visibility
+        //                 });
+        //             }
+        //         });
+        //     }
+        
+        //     // Iterate through the statuses and create the buttons
+        //     statuses.forEach((status) => {
+        //         const button = frm.add_custom_button(
+        //             __(status.label),
+        //             function () {
+        //                 console.log("Button clicked for status: " + status.label);
+        
+        //                 // On button click, set the status and save
+        //                 frm.set_value("status", status.value);
+        
+        //                 // Perform the save operation and update the array after it is successful
+        //                 frm.save().then(function () {
+        //                     // After save, add the status to submittedStatuses array
+        //                     if (!submittedStatuses.includes(status.value)) {
+        //                         submittedStatuses.push(status.value);
+        //                         console.log("Status added to submittedStatuses: " + status.value);
+        //                     } else {
+        //                         console.log("Status already in submittedStatuses: " + status.value);
+        //                     }
+        
+        //                     // Print the array to the console after each update
+        //                     console.log("Current Submitted Statuses Array: ", submittedStatuses);
+        
+        //                     // Update button colors after saving
+        //                     updateButtonColors();
+        //                 }).catch(function (error) {
+        //                     console.log("Save failed: ", error);
+        //                 });
+        //             },
+        //             __("Change Status")
+        //         );
+        
+        //         // Assign a data attribute to the button for easier selection
+        //         button.attr("data-status", status.value);
+        
+        //         // Apply initial colors based on submittedStatuses array
+        //         if (submittedStatuses.includes(status.value)) {
+        //             console.log("Initial Green button for: " + status.label);
+        //             button.css({
+        //                 backgroundColor: "#28a745", // Green for submitted statuses
+        //                 color: "white" // White text for visibility
+        //             });
+        //         } else {
+        //             console.log("Initial Blue button for: " + status.label);
+        //             button.css({
+        //                 backgroundColor: "#007bff", // Blue for remaining statuses
+        //                 color: "white" // White text for visibility
+        //             });
+        //         }
+        //     });
+        
+        //     // Initial color update on page load
+        //     updateButtonColors();
+        // }
         
         
-         
-         
+        
         if (frm.doc.status === "Converted"){
            
             
@@ -382,7 +541,8 @@ frappe.ui.form.on("Enquiry", {
             // Remove the custom button if the condition is not met
             frm.page.clear_secondary_action();
         }
-        
+
+
         
 
     },
@@ -415,6 +575,8 @@ frappe.ui.form.on("Enquiry", {
    
 
 });
+
+
 function change(frm) {
 
     var status = frm.doc.status;
