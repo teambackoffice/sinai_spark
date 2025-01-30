@@ -125,56 +125,43 @@ frappe.ui.form.on("Enquiry", {
 
         if (frm.doc.docstatus == 1) {
             const statuses = [
-                { label: "Pending", value: "Pending" },
-                { label: "To Consultant", value: "To Consultant" },
-                { label: "Rejected", value: "Rejected" },
-                { label: "Hold", value: "Hold" },
-                { label: "Closed", value: "Closed" },
-                { label: "No Response", value: "No Response" },
-                { label: "Need Assistance", value: "Need Assistance" },
-                { label: "Just Data Base", value: "Just Data Base" },
+                "Pending", "To Consultant", "Rejected", "Hold",
+                "Closed", "No Response", "Need Assistance", "Just Data Base"
             ];
         
             let buttons = {};
-            let statusHistory = (frm.doc.status_history || "").split(",").map(s => s.trim());
+            let statusHistory = new Set((frm.doc.status_history || "").split(",").map(s => s.trim()));
         
             statuses.forEach((status) => {
                 let button = frm.add_custom_button(
-                    __(status.label),
+                    __(status),
                     function () {
-                        // Update the status field
-                        frm.set_value("status", status.value);
-                        
-                        // Update status history
-                        let newHistory = new Set(statusHistory);
-                        newHistory.add(status.value); // Add new status
-                        
-                        frm.set_value("status_history", Array.from(newHistory).join(", ")); // Save updated history
-                        frm.save();
-                        
-                        updateButtonColors(newHistory);
+                        frappe.confirm(
+                            `The status is set to "${status}". Do you want to Send E-mail?`,
+                            function() {
+                                frm.set_value("status", status);
+                                statusHistory.add(status);
+                                frm.set_value("status_history", Array.from(statusHistory).join(", "));
+                                frm.save();
+                                updateButtonColors();
+                            }
+                        );
                     },
                     __("Change Status")
                 );
         
-                // Store the button reference
-                buttons[status.value] = button;
+                buttons[status] = button;
             });
         
-            // Function to update button colors based on status history
-            function updateButtonColors(updatedHistory) {
-                Object.keys(buttons).forEach((statusValue) => {
-                    if (updatedHistory.has(statusValue)) {
-                        buttons[statusValue].css({ color: "#28a745" }); // Green if in history
-                    } else {
-                        buttons[statusValue].css({ color: "#dc3545" }); // Red otherwise
-                    }
+            function updateButtonColors() {
+                Object.keys(buttons).forEach(status => {
+                    buttons[status].css({ color: statusHistory.has(status) ? "#28a745" : "#dc3545" });
                 });
             }
         
-            // Initial color update
-            updateButtonColors(new Set(statusHistory));
+            updateButtonColors();
         }
+        
         
         
         
@@ -278,7 +265,6 @@ frappe.ui.form.on("Enquiry", {
         
         if (frm.doc.status === "Converted"){
            
-            
             frm.add_custom_button(__('Meeting On Going'), function() {
                 frappe.confirm(
                     `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
