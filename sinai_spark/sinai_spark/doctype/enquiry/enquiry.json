@@ -34,6 +34,8 @@
   "value",
   "attachments_section",
   "attach",
+  "section_break_dtjc",
+  "status_history",
   "connections_tab"
  ],
  "fields": [
@@ -209,12 +211,22 @@
    "fieldtype": "Table",
    "label": "Attach",
    "options": "Attachments"
+  },
+  {
+   "fieldname": "section_break_dtjc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status_history",
+   "fieldtype": "Data",
+   "label": "Status History",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-25 14:46:39.043168",
+ "modified": "2025-01-27 16:03:21.049303",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
