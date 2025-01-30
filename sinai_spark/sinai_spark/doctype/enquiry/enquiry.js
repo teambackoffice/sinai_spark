@@ -123,119 +123,246 @@ frappe.ui.form.on("Enquiry", {
            
             
             frm.add_custom_button(__('Meeting On Going'), function() {
-                frm.set_value('status', 'Meeting On Going');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Meeting On Going');
+                    }
+                );
             }, __("Change Status"));
             
+            
             frm.add_custom_button(__('Meeting Done'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                    }
+                );
             }, __("Change Status"));
     
             frm.add_custom_button(__('Proposal Sending'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Completed'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                    }
+                );
             }, __("Change Status"));
         }
 
         if (frm.doc.status === "Meeting On Going"){
                        
             frm.add_custom_button(__('Meeting Done'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                    }
+                );
             }, __("Change Status"));
     
             frm.add_custom_button(__('Proposal Sending'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Completed'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                    }
+                );
             }, __("Change Status"));
         }
 
         if (frm.doc.status === "Meeting Done"){
                        
             frm.add_custom_button(__('Meeting On Going'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                    }
+                );
             }, __("Change Status"));
     
             frm.add_custom_button(__('Proposal Sending'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Completed'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                    }
+                );
             }, __("Change Status"));
         }
 
         if (frm.doc.status === "Proposal Sending"){
                        
             frm.add_custom_button(__('Meeting On Going'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                    }
+                );
             }, __("Change Status"));
     
             frm.add_custom_button(__('Meeting Done'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Completed'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Completed')
+                    }
+                );
             }, __("Change Status"));
         }
 
         if (frm.doc.status === "Completed"){
                        
             frm.add_custom_button(__('Meeting On Going'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting On Going')
+                    }
+                );
             }, __("Change Status"));
     
             frm.add_custom_button(__('Meeting Done'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Meeting Done')
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Proposal Sending'), function() {
-                frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frappe.db.set_value("Enquiry",frm.doc.name,'status', 'Proposal Sending')
+                    }
+                );
             }, __("Change Status"));
         }
 
         
 
         if (frm.doc.status == "To Consultant"){
+
             frm.add_custom_button(__('Pending'), function() {
-                frm.set_value('status', 'Pending');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Pending');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('To Consultant'), function() {
-                frm.set_value('status', 'To Consultant');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'To Consultant');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Rejected'), function() {
-                frm.set_value('status', 'Rejected');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Rejected');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Hold'), function() {
-                frm.set_value('status', 'Hold');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Hold');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Closed'), function() {
-                frm.set_value('status', 'Closed');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Closed');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('No Response'), function() {
-                frm.set_value('status', 'No Response');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'No Response');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Need Assistance'), function() {
-                frm.set_value('status', 'Need Assistance');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Need Assistance');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Just Data Base'), function() {
-                frm.set_value('status', 'Just Data Base');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Just Data Base');
+                    }
+                );
             }, __("Change Status"));
             
             frm.add_custom_button(__('Converted'), function() {
-                frm.set_value('status', 'Converted');
+                frappe.confirm(
+                    `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                    function() {
+                        frm.set_value('status', 'Converted');
+                    }
+                );
             }, __("Change Status"));
 
         }
@@ -265,192 +392,7 @@ frappe.ui.form.on("Enquiry", {
     iata_code: function(frm) {
         set_reference_no(frm);
     },
-    status: function(frm) {
-        if (frm.doc.status === "Pending") {
-            frappe.confirm(
-                'The status is set to "Pending". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() { 
-                }
-            );
-        }
-        else if (frm.doc.status === "To Consultant") {
-            frappe.confirm(
-                'The status is set to "To Consultant". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {  
-                }
-            );
-        }
-        else if (frm.doc.status === "Rejected") {
-            frappe.confirm(
-                'The status is set to "Rejected". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {  
-                }
-            );
-        }
-        else if (frm.doc.status === "Hold") {
-            frappe.confirm(
-                'The status is set to "Hold". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {
-                }
-            );
-        }
-        else if (frm.doc.status === "Closed") {
-            frappe.confirm(
-                'The status is set to "Closed". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {
-                }
-            );
-        }
-        else if (frm.doc.status === "Need Assistance") {
-            frappe.confirm(
-                'The status is set to "Need Assistance". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {  
-                }
-            );
-        }
-        else if (frm.doc.status === "No Response") {
-            frappe.confirm(
-                'The status is set to "No Response". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {
-                }
-            );
-        }
-        else if (frm.doc.status === "Just Data Base") {
-            frappe.confirm(
-                'The status is set to "Just Data Base". Do you want to Send E-mail?',
-                function() {
-                    // User confirmed, proceed to send the email
-                    frappe.call({
-                        method: 'sinai_spark.sinai_spark.doctype.enquiry.enquiry.send_mail_to_hr',
-                        args: {
-                            docname: frm.doc.name
-                        },
-                        callback: function(response) {
-                            if (response.message === 'success') {
-                                frappe.msgprint(__('Email sent to HR successfully.'));
-                            } else {
-                                frappe.msgprint(__('Failed to send email. Please try again.'));
-                            }
-                        }
-                    });
-                },
-                function() {
-                }
-            );
-        }
-    }
+    
 
     // onload:function(frm){
         // if (frm.doc.status === "Proposal Sending") {
