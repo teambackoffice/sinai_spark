@@ -135,51 +135,49 @@ frappe.ui.form.on("Enquiry", {
                 { label: "Just Data Base", value: "Just Data Base" },
             ];
         
-            // Iterate through the statuses
+            let buttons = {};
+            let statusHistory = (frm.doc.status_history || "").split(",").map(s => s.trim());
+        
             statuses.forEach((status) => {
-                const button = frm.add_custom_button(
+                let button = frm.add_custom_button(
                     __(status.label),
                     function () {
-                        // On button click, update the status and save
+                        // Update the status field
                         frm.set_value("status", status.value);
+                        
+                        // Update status history
+                        let newHistory = new Set(statusHistory);
+                        newHistory.add(status.value); // Add new status
+                        
+                        frm.set_value("status_history", Array.from(newHistory).join(", ")); // Save updated history
                         frm.save();
-                        updateButtonColors();
+                        
+                        updateButtonColors(newHistory);
                     },
                     __("Change Status")
                 );
         
-                // Apply initial colors based on the current status
-                if (frm.doc.status === "Pending") {
-                    button.css({
-                        color: "#007bff", // Blue for Pending
-                    });
-                } else if (frm.doc.status === status.value) {
-                    button.css({
-                        color: "#28a745", // Green for submitted statuses
-                    });
-                } else {
-                    button.css({
-                        color: "#dc3545", // Red for other statuses
-                    });
-                }
+                // Store the button reference
+                buttons[status.value] = button;
             });
         
-            // Function to update button colors dynamically
-            function updateButtonColors() {
-                statuses.forEach((status) => {
-                    const buttonElement = $(`.custom-actions button:contains('${status.label}')`);
-                    if (frm.doc.status === status.value) {
-                        buttonElement.css({
-                            color: "#28a745", // Green for submitted statuses
-                        });
+            // Function to update button colors based on status history
+            function updateButtonColors(updatedHistory) {
+                Object.keys(buttons).forEach((statusValue) => {
+                    if (updatedHistory.has(statusValue)) {
+                        buttons[statusValue].css({ color: "#28a745" }); // Green if in history
                     } else {
-                        buttonElement.css({
-                            color: "#dc3545", // Red for other statuses
-                        });
+                        buttons[statusValue].css({ color: "#dc3545" }); // Red otherwise
                     }
                 });
             }
+        
+            // Initial color update
+            updateButtonColors(new Set(statusHistory));
         }
+        
+        
+        
         // if (frm.doc.docstatus == 1) {
         //     // Initialize the statuses array with possible statuses
         //     const statuses = [
