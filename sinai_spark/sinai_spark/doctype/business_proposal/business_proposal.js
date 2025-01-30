@@ -1,6 +1,43 @@
 
 frappe.ui.form.on("Business Proposal", {
 	refresh: function(frm) {
+        if (frm.doc.docstatus == 1) {
+            const statuses = [
+                "Pending", "Proposal Sent", "Under Negotiation", "Rejected", "Completed"
+            ];
+        
+            let buttons = {};
+            let statusHistory = new Set((frm.doc.status_history || "").split(",").map(s => s.trim()));
+        
+            statuses.forEach((status) => {
+                let button = frm.add_custom_button(
+                    __(status),
+                    function () {
+                        frappe.confirm(
+                            `The status is set to "${status}". Do you want to Send E-mail?`,
+                            function() {
+                                frm.set_value("status", status);
+                                statusHistory.add(status);
+                                frm.set_value("status_history", Array.from(statusHistory).join(", "));
+                                frm.save();
+                                updateButtonColors();
+                            }
+                        );
+                    },
+                    __("Change Status")
+                );
+        
+                buttons[status] = button;
+            });
+        
+            function updateButtonColors() {
+                Object.keys(buttons).forEach(status => {
+                    buttons[status].css({ color: statusHistory.has(status) ? "#28a745" : "#dc3545" });
+                });
+            }
+        
+            updateButtonColors();
+        }
          
         if (!frm.is_new()) {
             if (frm.doc.status === "Completed") {
