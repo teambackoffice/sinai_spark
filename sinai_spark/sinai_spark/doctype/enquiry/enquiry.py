@@ -4,9 +4,10 @@
 # import frappe
 from frappe.model.document import Document
 
-
 class Enquiry(Document):
-	pass
+   pass
+
+
 # import frappe
 
 # @frappe.whitelist()

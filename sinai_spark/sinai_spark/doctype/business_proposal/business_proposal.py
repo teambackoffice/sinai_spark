@@ -211,3 +211,14 @@ def get_change(status, docname):
 #     # Commit the changes to the database
 #     frappe.db.commit()
 #     return True
+
+
+import frappe
+from frappe.utils import money_in_words
+
+@frappe.whitelist()
+def get_amount_in_words(amount, currency=None):
+    """Convert a number to words"""
+    if not amount:
+        return ""
+    return money_in_words(amount, currency)

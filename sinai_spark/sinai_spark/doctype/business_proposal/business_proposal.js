@@ -1,6 +1,43 @@
 
 frappe.ui.form.on("Business Proposal", {
 	refresh: function(frm) {
+        if (frm.doc.docstatus == 1) {
+            const statuses = [
+                "Pending", "Proposal Sent", "Under Negotiation", "Rejected", "Completed"
+            ];
+        
+            let buttons = {};
+            let statusHistory = new Set((frm.doc.status_history || "").split(",").map(s => s.trim()));
+        
+            statuses.forEach((status) => {
+                let button = frm.add_custom_button(
+                    __(status),
+                    function () {
+                        frappe.confirm(
+                            `The status is set to "${status}". Do you want to Send E-mail?`,
+                            function() {
+                                frm.set_value("status", status);
+                                statusHistory.add(status);
+                                frm.set_value("status_history", Array.from(statusHistory).join(", "));
+                                frm.save();
+                                updateButtonColors();
+                            }
+                        );
+                    },
+                    __("Change Status")
+                );
+        
+                buttons[status] = button;
+            });
+        
+            function updateButtonColors() {
+                Object.keys(buttons).forEach(status => {
+                    buttons[status].css({ color: statusHistory.has(status) ? "#28a745" : "#dc3545" });
+                });
+            }
+        
+            updateButtonColors();
+        }
          
         if (!frm.is_new()) {
             if (frm.doc.status === "Completed") {
@@ -35,41 +72,81 @@ frappe.ui.form.on("Business Proposal", {
 
 
         frm.add_custom_button(__('Pending'), function() {
-            frm.set_value('status', 'Pending').then(function(){
-                change(frm);
-            });
+            frappe.confirm(
+                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                function() {
+                    frm.set_value('status', 'Pending').then(function() {
+                        change(frm);
+                    });
+                }
+            );
         }, __("Change Status"));
         
         frm.add_custom_button(__('Proposal Sent'), function() {
-            frm.set_value('status', 'Proposal Sent').then(function(){
-                change(frm);
-            });
+            frappe.confirm(
+                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                function() {
+                    frm.set_value('status', 'Proposal Sent').then(function(){
+                        change(frm);
+                    });
+                }
+            );
         }, __("Change Status"));
         
         frm.add_custom_button(__('Under Negotiation'), function() {
-            frm.set_value('status', 'Under Negotiation').then(function(){
-                change(frm);
-            });
+            frappe.confirm(
+                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                function() {
+                    frm.set_value('status', 'Under Negotiation').then(function(){
+                        change(frm);
+                    });
+                }
+            );
         }, __("Change Status"));
         
         frm.add_custom_button(__('Completed'), function() {
-
-            
-            frm.set_value('status', 'Completed').then(function(){
-                change(frm);
-            });
+            frappe.confirm(
+                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                function() {
+                    frm.set_value('status', 'Completed').then(function(){
+                        change(frm);
+                    });
+                }
+            );
         }, __("Change Status"));
         
         frm.add_custom_button(__('Rejected'), function() {
-            frm.set_value('status', 'Rejected').then(function(){
-                change(frm);
-            });
+            frappe.confirm(
+                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
+                function() {
+                    frm.set_value('status', 'Rejected').then(function(){
+                        change(frm);
+                    });
+                }
+            );
         }, __("Change Status"));
         
-
-
-
     },
+    
+    total_amount: function(frm) {
+        if (frm.doc.total_amount) {
+            frappe.call({
+                method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_amount_in_words',
+                args: {
+                    amount: frm.doc.total_amount,// Ensure you have a currency field
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frm.set_value('amount_in_words', r.message);
+                    }
+                }
+            });
+        } else {
+            frm.set_value('amount_in_words', '');
+        }
+    }
+
+    
    
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,6 +248,3 @@ frappe.ui.form.on("Business Proposal Item","business_proposal_item_remove",funct
 	frm.refresh_field("total_amount")
 	
 });
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
