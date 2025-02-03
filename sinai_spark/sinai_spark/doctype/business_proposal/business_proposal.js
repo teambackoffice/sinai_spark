@@ -127,6 +127,26 @@ frappe.ui.form.on("Business Proposal", {
         }, __("Change Status"));
         
     },
+    
+    total_amount: function(frm) {
+        if (frm.doc.total_amount) {
+            frappe.call({
+                method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_amount_in_words',
+                args: {
+                    amount: frm.doc.total_amount,// Ensure you have a currency field
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frm.set_value('amount_in_words', r.message);
+                    }
+                }
+            });
+        } else {
+            frm.set_value('amount_in_words', '');
+        }
+    }
+
+    
    
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////////
