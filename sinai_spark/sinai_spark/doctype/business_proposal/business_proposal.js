@@ -126,6 +126,22 @@ frappe.ui.form.on("Business Proposal", {
                 }
             );
         }, __("Change Status"));
+
+        if(frm.doc.docstatus === "Completed"){
+            frm.add_custom_button(__('Create Sales Order'), function() {
+                frappe.call({
+                    method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.create_sales_order',
+                    args: { docname: frm.doc.name },
+                    callback: function(r) {
+                        if (r.message) {
+                            frappe.msgprint(__('Sales Order {0} Created', [r.message]));
+                            frappe.set_route('Form', 'Sales Order', r.message);
+                        }
+                    }
+                });
+            }, __("Create"));
+        }
+        
         
     },
     
@@ -205,6 +221,11 @@ function change(frm) {
 
 
 frappe.ui.form.on("Business Proposal Item", {
+    refresh: function(frm) {
+        if (frm.doc.docstatus === "Under Negotiation") {
+            frm.set_df_property("amount", "allow_on_submit", 1);
+        }
+    },
     item: function(frm, cdt, cdn) {
         console.log("Item selected");
         var d = locals[cdt][cdn];

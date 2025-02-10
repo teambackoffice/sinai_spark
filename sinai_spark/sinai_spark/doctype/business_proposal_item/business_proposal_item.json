@@ -16,7 +16,6 @@
  ],
  "fields": [
   {
-   "allow_on_submit": 1,
    "columns": 2,
    "fieldname": "amount",
    "fieldtype": "Currency",
@@ -69,7 +68,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-10 16:20:04.263394",
+ "modified": "2025-02-10 16:57:03.784071",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal Item",
