@@ -13,6 +13,7 @@
   "column_break_sjbn",
   "naming",
   "status",
+  "email_id",
   "amended_from",
   "section_break_omqo",
   "cf_status",
@@ -211,6 +212,11 @@
    "fieldtype": "Table",
    "label": "Document Expiry Details",
    "options": "Document Expiry Details"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -225,7 +231,7 @@
    "link_fieldname": "document_receiving"
   }
  ],
- "modified": "2024-06-20 08:39:33.948469",
+ "modified": "2025-02-10 15:52:36.626315",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Document Receiving",

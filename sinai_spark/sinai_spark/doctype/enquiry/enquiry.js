@@ -512,14 +512,13 @@ frappe.ui.form.on("Enquiry", {
         }
 
         if (frm.doc.status == "Proposal Sending") {
-                // Add a custom button near the save button
             frm.page.set_secondary_action(__('Proposal Sending'), function() {
-                // Open a new "Consulting" document with enquiry reference
                 frappe.new_doc('Business Proposal', {
                     consultating: frm.doc.name,
                     ref_no:frm.doc.name + "_B",
                     enquiry:frm.doc.name,
-                    customer:frm.doc.customer
+                    customer:frm.doc.customer,
+                    email_id:frm.doc.e_mail_id
                 });
             });
         } else {

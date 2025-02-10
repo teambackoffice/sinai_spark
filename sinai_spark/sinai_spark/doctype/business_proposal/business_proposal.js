@@ -48,7 +48,8 @@ frappe.ui.form.on("Business Proposal", {
                         business_proposal__id: frm.doc.name,
                         customer: frm.doc.customer,
                         naming: frm.doc.enquiry + "_D",
-                        enquiry: frm.doc.enquiry
+                        enquiry: frm.doc.enquiry,
+                        email_id: frm.doc.email_id
                     }, function(doc) {
                         // Loop through the items in the business proposal and add them to the new document receiving
                         frm.doc.business_proposal_item.forEach(function(item) {
