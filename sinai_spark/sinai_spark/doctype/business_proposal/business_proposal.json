@@ -186,7 +186,7 @@
    "fieldname": "business_proposal_type",
    "fieldtype": "Select",
    "label": "Business Proposal Type",
-   "options": "\nSample Proposal\nIncubator Proposal\nGS400 Proposal",
+   "options": "\nSample Proposal\nIncubator Proposal\nBusiness Setup Proposal\nGS400 Proposal",
    "reqd": 1
   }
  ],
@@ -198,7 +198,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-02-11 18:57:57.497482",
+ "modified": "2025-02-11 19:05:18.760452",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
