@@ -215,6 +215,7 @@ def get_change(status, docname):
 
 import frappe
 from frappe.utils import money_in_words
+from frappe.utils import today
 
 @frappe.whitelist()
 def get_amount_in_words(amount, currency=None):
@@ -222,3 +223,25 @@ def get_amount_in_words(amount, currency=None):
     if not amount:
         return ""
     return money_in_words(amount, currency)
+
+@frappe.whitelist()
+def create_sales_order(docname):
+    doc = frappe.get_doc("Business Proposal", docname)
+    bp = frappe.get_doc("Business Proposal Item", {"parent": docname})
+    
+
+    sales_order = frappe.get_doc({
+        "doctype": "Sales Order",
+        "customer": doc.customer,
+        "custom_business_proposal":doc.name,
+        "items": [{
+            "item_code": bp.item,
+            "amount": bp.amount,  
+            "qty":1,
+            "delivery_date": today(),
+        }]
+    })
+
+    sales_order.insert(ignore_permissions=True)
+    
+    return sales_order.name

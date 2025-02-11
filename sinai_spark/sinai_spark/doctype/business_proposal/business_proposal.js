@@ -127,7 +127,7 @@ frappe.ui.form.on("Business Proposal", {
             );
         }, __("Change Status"));
 
-        if(frm.doc.docstatus === "Completed"){
+        if (frm.doc.status === "Completed") {  // Check status, not docstatus
             frm.add_custom_button(__('Create Sales Order'), function() {
                 frappe.call({
                     method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.create_sales_order',
@@ -216,16 +216,13 @@ function change(frm) {
 }
 
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 frappe.ui.form.on("Business Proposal Item", {
-    refresh: function(frm) {
-        if (frm.doc.docstatus === "Under Negotiation") {
-            frm.set_df_property("amount", "allow_on_submit", 1);
-        }
-    },
+    // refresh: function(frm) {
+    //     if (frm.doc.docstatus === 1 && frm.doc.status !== 'Under Negotiation') {
+    //         frm.fields_dict['business_proposal_item'].grid.get_field('amount').df.read_only = 1;
+    //         frm.refresh_field('business_proposal_item');
+    //     }
+    // },
     item: function(frm, cdt, cdn) {
         console.log("Item selected");
         var d = locals[cdt][cdn];

@@ -111,7 +111,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pending\nProposal Sent\nUnder Negotiation\nCompleted\nRejected",
+   "options": "Pending\nPaid\nPartially Paid\nProposal Sent\nUnder Negotiation\nCompleted\nRejected",
    "read_only": 1
   },
   {
@@ -190,7 +190,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-02-03 14:39:07.368710",
+ "modified": "2025-02-11 12:38:58.782199",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",

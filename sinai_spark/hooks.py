@@ -134,6 +134,11 @@ doc_events = {
 		"on_cancel": "sinai_spark.doc_events.sales_invoice.on_cancel_so",
 		# "on_trash": "method"
 	},
+    "Payment Entry": {
+        "on_submit": "sinai_spark.doc_events.payment_entry.on_submit",
+        "on_cancel": "sinai_spark.doc_events.payment_entry.on_cancel",
+		"update_business_proposal_status": "sinai_spark.doc_events.payment_entry.update_business_proposal_status",
+	},
 }
 
 # Scheduled Tasks
@@ -258,7 +263,8 @@ fixtures = [
 					"Payment Entry-custom_document_receiving",
                     "Sales Invoice-custom_company_formation",
                     "Item-custom_scope_of_work",
-                    "Sales Order-custom_document_receiving"
+                    "Sales Order-custom_document_receiving",
+                    "Sales Order-custom_business_proposal",
                    
 
 
