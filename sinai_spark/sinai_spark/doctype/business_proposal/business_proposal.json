@@ -10,6 +10,7 @@
   "column_break_hcdy",
   "customer",
   "email_id",
+  "business_proposal_type",
   "column_break_aort",
   "ref_no",
   "status",
@@ -180,6 +181,13 @@
    "fieldname": "terms_and_conditions",
    "fieldtype": "Text Editor",
    "label": "Terms and conditions"
+  },
+  {
+   "fieldname": "business_proposal_type",
+   "fieldtype": "Select",
+   "label": "Business Proposal Type",
+   "options": "\nSample Proposal\nIncubator Proposal\nGS400 Proposal",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -190,7 +198,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-02-11 12:38:58.782199",
+ "modified": "2025-02-11 18:57:57.497482",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
