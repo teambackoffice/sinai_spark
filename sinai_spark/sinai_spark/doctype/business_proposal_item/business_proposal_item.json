@@ -22,7 +22,7 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Amount",
-   "read_only": 1
+   "read_only_depends_on": "eval:doc.docstatus !=0 && parent.status != \"Under Negotiation\"\n"
   },
   {
    "fieldname": "column_break_spte",
@@ -33,7 +33,7 @@
    "columns": 6,
    "fetch_from": "item.custom_scope_of_work",
    "fieldname": "scope_of_work",
-   "fieldtype": "Data",
+   "fieldtype": "Text Editor",
    "in_list_view": 1,
    "label": "Scope of work"
   },
@@ -70,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-27 23:09:27.054144",
+ "modified": "2025-02-12 12:12:03.215984",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal Item",
