@@ -142,70 +142,51 @@ frappe.ui.form.on("Business Proposal", {
             }, __("Create"));
         }
 
-        // if (frm.doc.status === "Under Negotiation") {
-        //     frm.add_custom_button(__('Update Amount'), function() {
-        //         // Create a dialog to capture Service Code and Amount
-        //         let dialog = new frappe.ui.Dialog({
-        //             title: __('Update Amount for Service Code'),
-        //             fields: [
-        //                 {
-        //                     fieldtype: 'Link',
-        //                     fieldname: 'service_code',
-        //                     label: __('Service Code'),
-        //                     options: 'Item'  // This means the service_code is linked to the Item doctype
-        //                 },
-        //                 {
-        //                     fieldtype: 'Currency',
-        //                     fieldname: 'amount',
-        //                     label: __('Amount')
-        //                 }
-        //             ],
-        //             primary_action_label: __('Save'),
-        //             primary_action: function(data) {
-        //                 // Validate input: Ensure a Service Code was provided
-        //                 if (!data.service_code) {
-        //                     frappe.msgprint(__('Please provide a Service Code.'));
-        //                     return;
-        //                 }
-                        
-        //                 // Search for a matching row in the child table based on the provided Service Code
-        //                 let child_row = frm.doc.business_proposal_item.find(row => row.service_code === data.service_code);
-            
-        //                 if (child_row) {
-        //                     // If the row exists, update its amount
-        //                     if(child_row.name) {
-        //                         // If the row is already saved in the DB, update it using a server call
-        //                         frappe.call({
-        //                             method: "frappe.client.set_value",
-        //                             args: {
-        //                                 doctype: "Business Proposal Item",
-        //                                 name: child_row.name,
-        //                                 fieldname: "amount",
-        //                                 value: data.amount
-        //                             },
-        //                             callback: function(response) {
-        //                                 if (!response.exc) {
-        //                                     // Also update the local document so the UI reflects the change
-        //                                     child_row.amount = data.amount;
-        //                                     frm.refresh_field("business_proposal_item");
-        //                                     frappe.msgprint(__('Amount updated successfully.'));
-        //                                 }
-        //                             }
-        //                         });
-        //                     } else {
-        //                         // For unsaved rows, update the local value directly
-        //                         child_row.amount = data.amount;
-        //                         frm.refresh_field("business_proposal_item");
-        //                         frappe.msgprint(__('Amount updated locally (row not saved yet).'));
-        //                     }
-        //                 } 
-                        
-        //                 dialog.hide();
-        //             }
-        //         });
-        //         dialog.show();
-        //     }, __("Update"));
-        // }        
+        if (frm.doc.status === "Under Negotiation") {
+            frm.add_custom_button(__('Update Amount'), function() {
+                let dialog = new frappe.ui.Dialog({
+                    title: __('Update Amount for Service Code'),
+                    fields: [
+                        {
+                            fieldtype: 'Link',
+                            fieldname: 'service_code',
+                            label: __('Service Code'),
+                            options: 'Item'
+                        },
+                        {
+                            fieldtype: 'Currency',
+                            fieldname: 'amount',
+                            label: __('Amount')
+                        }
+                    ],
+                    primary_action_label: __('Save'),
+                    primary_action: function(data) {
+                        // Find the matching row in the child table
+                        let child_row = frm.doc.business_proposal_item.find(row => row.item === data.service_code);
+        
+                        if (child_row) {
+                            // Update the value in the database
+                            frappe.db.set_value('Business Proposal Item', child_row.name, 'amount', data.amount)
+                                .then(() => {
+                                    // Update the local UI to reflect the change
+                                    child_row.amount = data.amount;
+                                    frm.refresh_field('business_proposal_item');
+                                    frappe.msgprint(__('Amount updated successfully.'));
+                                })
+                                .catch(() => {
+                                    frappe.msgprint(__('Failed to update the amount.'));
+                                });
+                        } else {
+                            frappe.msgprint(__('No matching row found for the entered Service Code.'));
+                        }
+        
+                        dialog.hide(); // Close the dialog
+                    }
+                });
+                dialog.show();
+            }, __("Update"));
+        }
+        
     },
     
     total_amount: function(frm) {
