@@ -10,6 +10,7 @@
   "column_break_hcdy",
   "customer",
   "email_id",
+  "business_proposal_type",
   "column_break_aort",
   "ref_no",
   "status",
@@ -22,11 +23,16 @@
   "column_break_eohr",
   "total_amount",
   "amended_from",
+  "amount_in_words",
   "reference_details_section",
   "column_break_ezqe",
   "enquiry",
-  "column_break_skqx",
-  "connections_tab"
+  "bank_details_tab",
+  "bank_details",
+  "terms_tab",
+  "terms_and_conditions",
+  "connections_tab",
+  "status_history"
  ],
  "fields": [
   {
@@ -106,7 +112,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pending\nProposal Sent\nUnder Negotiation\nCompleted\nRejected",
+   "options": "Pending\nPaid\nPartially Paid\nProposal Sent\nUnder Negotiation\nCompleted\nRejected",
    "read_only": 1
   },
   {
@@ -143,8 +149,47 @@
    "label": "Remarks"
   },
   {
-   "fieldname": "column_break_skqx",
-   "fieldtype": "Column Break"
+   "allow_on_submit": 1,
+   "fieldname": "status_history",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Status History",
+   "read_only": 1
+  },
+  {
+   "default": "NAME- START ENGINE LIMITED COMPANY \nMuharriq Al Bidaya Limited Company\nBANK\t: SABB BANK\nIBAN No: SA7845000000353381916001\n\n\nA/C No\t:353381916001",
+   "fieldname": "bank_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Bank Details"
+  },
+  {
+   "default": "NAME- START ENGINE LIMITED COMPANY \nMuharriq Al Bidaya Limited Company\nBANK\t: SABB BANK\nIBAN No: SA7845000000353381916001\nA/C No\t:353381916001",
+   "fieldname": "bank_details",
+   "fieldtype": "Small Text",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "amount_in_words",
+   "fieldtype": "Data",
+   "label": "Amount in Words",
+   "read_only": 1
+  },
+  {
+   "fieldname": "terms_tab",
+   "fieldtype": "Tab Break",
+   "label": "Terms"
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Text Editor",
+   "label": "Terms and conditions"
+  },
+  {
+   "fieldname": "business_proposal_type",
+   "fieldtype": "Select",
+   "label": "Business Proposal Type",
+   "options": "\nSample Proposal\nIncubator Proposal\nBusiness Setup Proposal\nGS400 Proposal",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -155,7 +200,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-01-23 16:01:50.930166",
+ "modified": "2025-04-16 12:44:05.992881",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
@@ -176,6 +221,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [

@@ -28,7 +28,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Sales Order" : "public/js/sales_order.js"}
+doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -133,6 +133,11 @@ doc_events = {
 		# "on_update": "method",
 		"on_cancel": "sinai_spark.doc_events.sales_invoice.on_cancel_so",
 		# "on_trash": "method"
+	},
+    "Payment Entry": {
+        "on_submit": "sinai_spark.doc_events.payment_entry.on_submit",
+        "on_cancel": "sinai_spark.doc_events.payment_entry.on_cancel",
+		"update_business_proposal_status": "sinai_spark.doc_events.payment_entry.update_business_proposal_status",
 	},
 }
 
@@ -258,7 +263,8 @@ fixtures = [
 					"Payment Entry-custom_document_receiving",
                     "Sales Invoice-custom_company_formation",
                     "Item-custom_scope_of_work",
-                    "Sales Order-custom_document_receiving"
+                    "Sales Order-custom_document_receiving",
+                    "Sales Order-custom_business_proposal",
                    
 
 

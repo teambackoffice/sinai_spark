@@ -17,6 +17,7 @@
   "status",
   "customer",
   "si_status",
+  "email_id",
   "saudi_comapny_section",
   "saudi_company_registration",
   "saudi_company_registration_details",
@@ -246,6 +247,11 @@
   {
    "fieldname": "column_break_uyzb",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -256,7 +262,7 @@
    "link_fieldname": "custom_company_formation"
   }
  ],
- "modified": "2024-06-27 15:38:21.757994",
+ "modified": "2025-02-10 16:06:29.324576",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Company Formation",

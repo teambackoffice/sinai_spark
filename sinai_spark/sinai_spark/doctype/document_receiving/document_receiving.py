@@ -29,6 +29,7 @@ class DocumentReceiving(Document):
 		cf.customer = self.customer
 		cf.document_receiving = self.name
 		cf.company = self.company
+		cf.email_id = self.email_id
 
 		for item in self.items:
 			cf.append("items", {

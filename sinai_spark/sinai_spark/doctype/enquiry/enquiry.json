@@ -32,8 +32,10 @@
   "remarks",
   "column_break_yfia",
   "value",
-  "section_break_xmzg",
-  "attachments",
+  "attachments_section",
+  "attach",
+  "section_break_dtjc",
+  "status_history",
   "connections_tab"
  ],
  "fields": [
@@ -200,25 +202,33 @@
    "label": "Consultant Remarks"
   },
   {
-   "fieldname": "section_break_xmzg",
+   "fieldname": "attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "attach",
+   "fieldtype": "Table",
+   "label": "Attach",
+   "options": "Attachments"
+  },
+  {
+   "fieldname": "section_break_dtjc",
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "attachments",
-   "fieldtype": "Table",
-   "label": "Attachments",
-   "options": "Attachments"
+   "allow_on_submit": 1,
+   "fieldname": "status_history",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Status History",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Business Proposal",
-   "link_fieldname": "enquiry"
-  }
- ],
- "modified": "2025-01-23 10:54:53.008964",
+ "links": [],
+ "modified": "2025-01-30 15:12:53.948611",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",

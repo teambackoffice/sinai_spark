@@ -8,7 +8,8 @@
  "field_order": [
   "document_expiry_item",
   "column_break_aovz",
-  "document_expiry_date"
+  "document_expiry_date",
+  "attach"
  ],
  "fields": [
   {
@@ -29,12 +30,17 @@
   {
    "fieldname": "column_break_aovz",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attach",
+   "fieldtype": "Attach",
+   "label": "Attach"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-06-20 08:49:02.844641",
+ "modified": "2025-01-28 14:29:39.708571",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Document Expiry Details",
