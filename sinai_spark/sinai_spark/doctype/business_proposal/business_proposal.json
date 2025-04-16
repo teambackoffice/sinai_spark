@@ -157,11 +157,13 @@
    "read_only": 1
   },
   {
+   "default": "NAME- START ENGINE LIMITED COMPANY \nMuharriq Al Bidaya Limited Company\nBANK\t: SABB BANK\nIBAN No: SA7845000000353381916001\n\n\nA/C No\t:353381916001",
    "fieldname": "bank_details_tab",
    "fieldtype": "Tab Break",
    "label": "Bank Details"
   },
   {
+   "default": "NAME- START ENGINE LIMITED COMPANY \nMuharriq Al Bidaya Limited Company\nBANK\t: SABB BANK\nIBAN No: SA7845000000353381916001\nA/C No\t:353381916001",
    "fieldname": "bank_details",
    "fieldtype": "Small Text",
    "label": "Bank Details"
@@ -198,7 +200,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-02-11 19:05:18.760452",
+ "modified": "2025-04-16 12:44:05.992881",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
@@ -219,6 +221,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [
