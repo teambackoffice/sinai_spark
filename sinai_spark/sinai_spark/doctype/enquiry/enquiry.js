@@ -1,4 +1,42 @@
-frappe.ui.form.on("Enquiry", {
+frappe.ui.form.on('Enquiry', {
+    customer: function(frm) {
+        if (frm.doc.customer) {
+            frappe.db.get_doc('Customer', frm.doc.customer)
+                .then(customer => {
+                    if (customer.customer_primary_contact) {
+                        frm.set_value('contact', customer.customer_primary_contact);
+
+            
+                        frappe.db.get_doc('Contact', customer.customer_primary_contact)
+                            .then(contact => {
+        
+                                if (contact.email_id) {
+                                    frm.set_value('e_mail_id', contact.email_id);
+                                }
+
+                                if (contact.mobile_no) {
+                                    frm.set_value('contact', contact.mobile_no);
+                                } else if (contact.phone) {
+                                    frm.set_value('contact', contact.phone);
+                                } else {
+                                    frm.set_value('contact', '');
+                                 
+                                }
+                            })
+                            .catch(err => {
+                            
+                                console.error(err);
+                            });
+                    } else {
+                        frappe.msgprint(__('This customer does not have a primary contact.'));
+                    }
+                })
+                .catch(err => {
+                    
+                    console.error(err);
+                });
+        }
+    },
     refresh: function(frm) {
         if (frm.doc.docstatus ==1) {
             console.log("dddddddddddddd")
