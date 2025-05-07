@@ -64,12 +64,9 @@ frappe.ui.form.on("Business Proposal", {
                         frappe.set_route('Form', doc.doctype, doc.name);
                     });
                 });
-            } else {
-                frm.page.clear_secondary_action();
-            }
-        } else {
-            frm.page.clear_secondary_action();
-        }
+            } 
+        } 
+
 
 
         frm.add_custom_button(__('Pending'), function() {
