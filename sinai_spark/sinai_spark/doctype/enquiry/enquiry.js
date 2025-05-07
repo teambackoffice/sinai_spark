@@ -1,4 +1,4 @@
-frappe.ui.form.on("Enquiry", {
+frappe.ui.form.on('Enquiry', {
     customer: function(frm) {
         if (frm.doc.customer) {
             frappe.db.get_doc('Customer', frm.doc.customer)
