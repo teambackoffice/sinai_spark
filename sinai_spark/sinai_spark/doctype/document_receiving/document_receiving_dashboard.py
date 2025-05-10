@@ -1,6 +1,4 @@
-
 from frappe import _
-
 def get_data():
 	return {
 		"fieldname": "business_proposal__id",
