@@ -17,6 +17,28 @@ class BusinessProposal(Document):
                             
                 frappe.db.commit()
                 self.reload()
+
+    def on_submit(self):
+        if self.email_id:
+            subject = f"Business Proposal Submitted: {self.name}"
+            message = f"""
+                Dear {self.customer},<br><br>
+                Your business proposal <strong>{self.name}</strong> has been successfully submitted.<br><br>
+                <strong>Scope of Work:</strong><br>
+            """
+            for row in self.business_proposal_item:
+                message += f"- {row.scope_of_work} — SAR {row.amount}<br>"
+
+            message += f"<br><strong>Total Amount:</strong> SAR {self.total_amount}<br><br>"
+            message += "Best regards,<br>Sinai Spark Team"
+
+            frappe.sendmail(
+                recipients=[self.email_id],
+                subject=subject,
+                message=message
+            )
+            frappe.db.commit()
+
                   
                   
 # 	@frappe.whitelist()
@@ -245,3 +267,7 @@ def create_sales_order(docname):
     sales_order.insert(ignore_permissions=True)
     
     return sales_order.name
+
+
+
+
