@@ -14,6 +14,8 @@
   "naming",
   "status",
   "email_id",
+  "contact",
+  "address_display",
   "amended_from",
   "section_break_omqo",
   "cf_status",
@@ -217,6 +219,17 @@
    "fieldname": "email_id",
    "fieldtype": "Data",
    "label": "Email ID"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -231,7 +244,7 @@
    "link_fieldname": "document_receiving"
   }
  ],
- "modified": "2025-02-10 15:52:36.626315",
+ "modified": "2025-08-11 14:52:31.109167",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Document Receiving",
@@ -252,6 +265,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [

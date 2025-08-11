@@ -18,6 +18,8 @@
   "customer",
   "si_status",
   "email_id",
+  "contact",
+  "address_display",
   "saudi_comapny_section",
   "saudi_company_registration",
   "saudi_company_registration_details",
@@ -191,6 +193,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer"
   },
@@ -252,6 +255,17 @@
    "fieldname": "email_id",
    "fieldtype": "Data",
    "label": "Email ID"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -262,7 +276,7 @@
    "link_fieldname": "custom_company_formation"
   }
  ],
- "modified": "2025-02-10 16:06:29.324576",
+ "modified": "2025-08-11 14:51:30.268519",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Company Formation",
@@ -283,6 +297,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [

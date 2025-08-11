@@ -9,8 +9,10 @@
   "section_break_3biv",
   "column_break_hcdy",
   "customer",
-  "email_id",
   "business_proposal_type",
+  "email_id",
+  "contact",
+  "address_display",
   "column_break_aort",
   "ref_no",
   "status",
@@ -190,6 +192,17 @@
    "label": "Business Proposal Type",
    "options": "\nSample Proposal\nIncubator Proposal\nBusiness Setup Proposal\nGS400 Proposal",
    "reqd": 1
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -200,7 +213,7 @@
    "link_fieldname": "business_proposal__id"
   }
  ],
- "modified": "2025-05-07 14:57:54.660403",
+ "modified": "2025-08-11 14:47:58.135129",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Business Proposal",
