@@ -11,10 +11,10 @@
   "uom",
   "qty",
   "rate",
-  "attach",
   "conversion_factor",
   "column_break_jwrc",
-  "sales_order"
+  "sales_order",
+  "attach"
  ],
  "fields": [
   {
@@ -74,14 +74,13 @@
   {
    "fieldname": "attach",
    "fieldtype": "Attach",
-   "in_list_view": 1,
    "label": "Attach"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-01-23 16:09:45.740108",
+ "modified": "2025-01-25 14:47:57.708138",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Item Details DR",

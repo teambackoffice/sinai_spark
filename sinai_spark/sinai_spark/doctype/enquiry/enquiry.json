@@ -19,6 +19,7 @@
   "scope",
   "co",
   "customer_company_name",
+  "address_display",
   "column_break_yfyw",
   "status",
   "contact",
@@ -32,8 +33,8 @@
   "remarks",
   "column_break_yfia",
   "value",
-  "section_break_xmzg",
-  "attachments",
+  "attachments_section",
+  "attach",
   "connections_tab"
  ],
  "fields": [
@@ -200,25 +201,27 @@
    "label": "Consultant Remarks"
   },
   {
-   "fieldname": "section_break_xmzg",
-   "fieldtype": "Section Break"
+   "fieldname": "attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
   },
   {
-   "fieldname": "attachments",
+   "fieldname": "attach",
    "fieldtype": "Table",
-   "label": "Attachments",
+   "label": "Attach",
    "options": "Attachments"
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Business Proposal",
-   "link_fieldname": "enquiry"
-  }
- ],
- "modified": "2025-01-23 10:54:53.008964",
+ "links": [],
+ "modified": "2025-08-11 10:05:39.841670",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
@@ -243,6 +246,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "ASC",
  "states": [
