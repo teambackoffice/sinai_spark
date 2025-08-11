@@ -386,6 +386,73 @@ frappe.ui.form.on("Enquiry", {
         
 
     },
+    customer: function(frm) {
+        if (frm.doc.customer) {
+            frappe.call({
+                method: 'frappe.client.get_list',
+                args: {
+                    doctype: 'Contact',
+                    filters: [
+                        ['Dynamic Link', 'link_doctype', '=', 'Customer'],
+                        ['Dynamic Link', 'link_name', '=', frm.doc.customer]
+                    ],
+                    fields: ['name', 'email_id', 'is_primary_contact']
+                },
+                callback: function(response) {
+                    if (response.message && response.message.length > 0) {
+                        let contact = response.message[0];
+                        
+                        let primary_contact = response.message.find(c => c.is_primary_contact === 1);
+                        if (primary_contact) {
+                            contact = primary_contact;
+                        }
+                        
+                        if (contact.email_id) {
+                            frm.set_value('e_mail_id', contact.email_id);
+                            frm.refresh_field('e_mail_id');
+                        }
+                    }
+                }
+            });
+            
+            frappe.call({
+                method: 'frappe.client.get_list',
+                args: {
+                    doctype: 'Address',
+                    filters: [
+                        ['Dynamic Link', 'link_doctype', '=', 'Customer'],
+                        ['Dynamic Link', 'link_name', '=', frm.doc.customer]
+                    ],
+                    fields: ['name', 'address_line1', 'address_line2', 'city', 'state', 'pincode', 'country', 'email_id', 'phone'],
+                    limit: 1
+                },
+                callback: function(r) {
+                    if (r.message && r.message.length > 0) {
+                        let addr = r.message[0];
+                        let formatted_address = '';
+                        
+                        if (addr.address_line1) formatted_address += addr.address_line1 + '\n';
+                        if (addr.address_line2) formatted_address += addr.address_line2 + '\n';
+                        if (addr.city) formatted_address += addr.city + ', ';
+                        if (addr.state) formatted_address += addr.state + ' ';
+                        if (addr.pincode) formatted_address += addr.pincode + '\n';
+                        if (addr.country) formatted_address += addr.country + '\n';
+                        if (addr.email_id) formatted_address += addr.email_id + '\n';
+                        if (addr.phone) formatted_address += addr.phone;
+                        
+                        frm.set_value('address_display', formatted_address);
+                    } else {
+                        frm.set_value('address_display', 'No address found');
+                    }
+                }
+            });
+        } else {
+            frm.set_value('e_mail_id', '');
+            frm.set_value('address_display', '');
+            frm.refresh_field('e_mail_id');
+            frm.refresh_field('address_display');
+        }
+    },
     service_code: function(frm) {
         set_reference_no(frm);
     },

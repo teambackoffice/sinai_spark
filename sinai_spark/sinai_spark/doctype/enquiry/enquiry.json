@@ -19,6 +19,7 @@
   "scope",
   "co",
   "customer_company_name",
+  "address_display",
   "column_break_yfyw",
   "status",
   "contact",
@@ -209,12 +210,18 @@
    "fieldtype": "Table",
    "label": "Attach",
    "options": "Attachments"
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-25 14:46:39.043168",
+ "modified": "2025-08-11 10:05:39.841670",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Enquiry",
@@ -239,6 +246,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "ASC",
  "states": [

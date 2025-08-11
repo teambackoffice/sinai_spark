@@ -190,6 +190,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer"
   },
@@ -256,7 +257,7 @@
    "link_fieldname": "custom_company_formation"
   }
  ],
- "modified": "2024-06-27 15:38:21.757994",
+ "modified": "2025-08-11 09:45:31.058933",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Company Formation",
@@ -277,6 +278,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [
