@@ -1,40 +1,79 @@
 frappe.ui.form.on("Enquiry", {
     customer: function(frm) {
         if (frm.doc.customer) {
+            // Get address information
+            frappe.call({
+                method: 'frappe.client.get_list',
+                args: {
+                    doctype: 'Address',
+                    filters: [
+                        ['Dynamic Link', 'link_doctype', '=', 'Customer'],
+                        ['Dynamic Link', 'link_name', '=', frm.doc.customer]
+                    ],
+                    fields: ['name', 'address_line1', 'address_line2', 'city', 'state', 'pincode', 'country', 'email_id', 'phone'],
+                    limit: 1
+                },
+                callback: function(r) {
+                    if (r.message && r.message.length > 0) {
+                        let addr = r.message[0];
+                        let formatted_address = '';
+                        
+                        if (addr.address_line1) formatted_address += addr.address_line1 + '\n';
+                        if (addr.address_line2) formatted_address += addr.address_line2 + '\n';
+                        if (addr.city) formatted_address += addr.city + ', ';
+                        if (addr.state) formatted_address += addr.state + ' ';
+                        if (addr.pincode) formatted_address += addr.pincode + '\n';
+                        if (addr.country) formatted_address += addr.country + '\n';
+                        if (addr.email_id) formatted_address += addr.email_id + '\n';
+                        if (addr.phone) formatted_address += addr.phone;
+                        
+                        frm.set_value('address_display', formatted_address);
+                    } else {
+                        frm.set_value('address_display', 'No address found');
+                    }
+                }
+            });
+    
+            // Get customer contact information
             frappe.db.get_doc('Customer', frm.doc.customer)
                 .then(customer => {
                     if (customer.customer_primary_contact) {
-                        frm.set_value('contact', customer.customer_primary_contact);
-
-            
+                        // Get contact details
                         frappe.db.get_doc('Contact', customer.customer_primary_contact)
                             .then(contact => {
-        
+                                // Set email
                                 if (contact.email_id) {
                                     frm.set_value('e_mail_id', contact.email_id);
                                 }
-
+    
+                                // Set contact number (mobile takes priority over phone)
                                 if (contact.mobile_no) {
                                     frm.set_value('contact', contact.mobile_no);
                                 } else if (contact.phone) {
                                     frm.set_value('contact', contact.phone);
                                 } else {
                                     frm.set_value('contact', '');
-                                 
                                 }
                             })
                             .catch(err => {
-                            
-                                console.error(err);
+                                console.error('Error fetching contact details:', err);
                             });
                     } else {
                         frappe.msgprint(__('This customer does not have a primary contact.'));
                     }
                 })
                 .catch(err => {
-                    
-                    console.error(err);
+                    console.error('Error fetching customer details:', err);
                 });
+                
+        } else {
+            // Clear fields when no customer is selected
+            frm.set_value('e_mail_id', '');
+            frm.set_value('address_display', '');
+            frm.set_value('contact', '');
+            frm.refresh_field('e_mail_id');
+            frm.refresh_field('address_display');
+            frm.refresh_field('contact');
         }
     },
     refresh: function(frm) {
@@ -663,4 +702,5 @@ function set_reference_no(frm) {
         });
     }
 }
+
 
