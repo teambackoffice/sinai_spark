@@ -1,86 +1,59 @@
-
- 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import money_in_words
+from frappe.utils import today
 
- 
 class BusinessProposal(Document):
     def on_cancel(self):
-            if self.enquiry:
-                                            
-                frappe.db.sql("""UPDATE `tabEnquiry` SET status = 'To Consultant' WHERE name = %s""", self.enquiry)
-                frappe.db.commit()
-                self.reload()
+        if self.enquiry:
+            frappe.db.sql("""UPDATE `tabEnquiry` SET status = 'To Consultant' WHERE name = %s""", self.enquiry)
+            frappe.db.commit()
+            self.reload()
 
-            if self.consultating:
-                frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", self.consultating)
-                            
-                frappe.db.commit()
-                self.reload()
-                  
-                  
-# 	@frappe.whitelist()
-# 	def on_update(self):
-# 			print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-			
+        if self.consultating:
+            frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", self.consultating)
+            frappe.db.commit()
+            self.reload()
+
+# Email sending function
+def send_status_change_email(doc, status):
+    """Send email notification for status change"""
+    try:
+        # Get email template based on status (you can customize this)
+        subject = f"Business Proposal Status Changed to {status}"
+        message = f"""
+        Dear Customer,
         
-# 			if self.status == "Pending":
-# 				enq = self.consultating
-# 				if enq:
-# 					frappe.db.sql("""
-# 						UPDATE `tabConsultanting`
-# 						SET status = 'Proposal Sending'
-# 						WHERE name = %s
-# 					""", (enq,))
-# 					frappe.db.commit()
-
-			# if self.status == "Completed":
-			# 	enq = self.consultating
-			# 	if enq:
-			# 		frappe.db.sql("""
-			# 			UPDATE `tabConsultanting`
-			# 			SET status = 'Completed'
-			# 			WHERE name = %s
-			# 		""", (enq,))
-			# 		frappe.db.commit()
-
-# 			if self.status == "Completed":
-# 				enq = self.enquiry
-# 				if enq:
-# 					frappe.db.sql("""
-# 						UPDATE `tabEnquiry`
-# 						SET status = 'Converted'
-# 						WHERE name = %s
-# 					""", (enq,))
-# 					frappe.db.commit()
-
-	
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-# @frappe.whitelist()
-# def get_selling_price(item_code):
-#     price = frappe.get_value("Item Price", {"item_code": item_code, "selling": 1}, "price_list_rate")
-#     print(price)
-#     if price:
-#         return price
-#     else:
-#         return 0 
-
-# ////////////////////////////////////////////////////////////////////////////////////////
-import frappe
-from frappe import _  
+        Your business proposal {doc.name} status has been changed to: {status}
+        
+        Thank you for your business.
+        
+        Best regards,
+        Your Company Team
+        """
+        
+        if doc.email_id:
+            frappe.sendmail(
+                recipients=[doc.email_id],
+                subject=subject,
+                message=message,
+                now=True
+            )
+            frappe.msgprint(f"Email sent successfully to {doc.email_id}")
+        else:
+            frappe.msgprint("No email address found for this customer")
+            
+    except Exception as e:
+        frappe.log_error(f"Failed to send email: {str(e)}")
+        frappe.msgprint("Failed to send email notification")
 
 @frappe.whitelist()
 def get_selling_price(item_code):
-   
     price_list = frappe.get_value("Selling Settings", None, "selling_price_list")
     
     if not price_list:
         frappe.throw(_("Default Price List not set in Selling Settings"))
 
-    
     price = frappe.get_value("Item Price", {"item_code": item_code, "price_list": price_list}, "price_list_rate")
     
     if price:
@@ -88,15 +61,12 @@ def get_selling_price(item_code):
     else:
         return 0  
 
-   
-# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import frappe
-
 @frappe.whitelist()
-def get_status(status, docname):
+def get_status(status, docname, send_email=True):
+    """Handle status changes for Completed and Proposal Sent statuses"""
+    doc = frappe.get_doc("Business Proposal", docname)
+    
     if status == "Completed":
-        doc = frappe.get_doc("Business Proposal", docname)
-
         cok = doc.enquiry
         if cok:
             frappe.db.sql("""
@@ -105,15 +75,14 @@ def get_status(status, docname):
                 WHERE name = %s
             """, (cok,))
         
-        # Commit the changes to the database
+        # Send email if requested
+        if send_email and str(send_email).lower() != 'false':
+            send_status_change_email(doc, status)
+        
         frappe.db.commit()
         return True
-
-    
         
     elif status == "Proposal Sent":
-        doc = frappe.get_doc("Business Proposal", docname)
-        
         cok = doc.enquiry
         if cok:
             frappe.db.sql("""
@@ -122,31 +91,21 @@ def get_status(status, docname):
                 WHERE name = %s
             """, (cok,))
         
-        # Commit the changes to the database
+        # Send email if requested
+        if send_email and str(send_email).lower() != 'false':
+            send_status_change_email(doc, status)
+        
         frappe.db.commit()
         return True
         
     return False
 
-# ////////////////////////////////////
-
-import frappe
-
 @frappe.whitelist()
-def get_change(status, docname):
+def get_change(status, docname, send_email=True):
+    """Handle status changes for Pending, Under Negotiation, and Rejected statuses"""
+    doc = frappe.get_doc("Business Proposal", docname)
+    
     if status == "Pending":
-        doc = frappe.get_doc("Business Proposal", docname)
-        
-        # Update Consultanting status if exists
-        # enq = doc.consultating
-        # if enq:
-        #     frappe.db.sql("""
-        #         UPDATE `tabConsultanting`
-        #         SET status = 'Proposal Sending'
-        #         WHERE name = %s
-        #     """, (enq,))
-        
-        # Update Enquiry status if exists
         cok = doc.enquiry
         if cok:
             frappe.db.sql("""
@@ -161,62 +120,6 @@ def get_change(status, docname):
             
     return False
 
-	
-# ///////////////////////////////
-
-# import frappe
-
-# @frappe.whitelist()
-# def get_status(status, docname):
-#     # Fetch the document using the provided docname
-#     doc = frappe.get_doc("Business Proposal", docname)
-    
-#     if status == "Completed":
-#         # Update Consultanting status to 'Completed'
-#         enq = doc.consultating
-#         if enq:
-#             frappe.db.sql("""
-#                 UPDATE `tabConsultanting`
-#                 SET status = 'Completed'
-#                 WHERE name = %s
-#             """, (enq,))
-        
-#         # Update Enquiry status to 'Converted'
-#         cok = doc.enquiry
-#         if cok:
-#             frappe.db.sql("""
-#                 UPDATE `tabEnquiry`
-#                 SET status = 'Converted'
-#                 WHERE name = %s
-#             """, (cok,))
-#     else:
-#         # Update Consultanting status to 'Proposal Sending'
-#         enq = doc.consultating
-#         if enq:
-#             frappe.db.sql("""
-#                 UPDATE `tabConsultanting`
-#                 SET status = 'Proposal Sending'
-#                 WHERE name = %s
-#             """, (enq,))
-        
-#         # Update Enquiry status to 'To Consultant'
-#         cok = doc.enquiry
-#         if cok:
-#             frappe.db.sql("""
-#                 UPDATE `tabEnquiry`
-#                 SET status = 'To Consultant'
-#                 WHERE name = %s
-#             """, (cok,))
-    
-#     # Commit the changes to the database
-#     frappe.db.commit()
-#     return True
-
-
-import frappe
-from frappe.utils import money_in_words
-from frappe.utils import today
-
 @frappe.whitelist()
 def get_amount_in_words(amount, currency=None):
     """Convert a number to words"""
@@ -229,15 +132,14 @@ def create_sales_order(docname):
     doc = frappe.get_doc("Business Proposal", docname)
     bp = frappe.get_doc("Business Proposal Item", {"parent": docname})
     
-
     sales_order = frappe.get_doc({
         "doctype": "Sales Order",
         "customer": doc.customer,
-        "custom_business_proposal":doc.name,
+        "custom_business_proposal": doc.name,
         "items": [{
             "item_code": bp.item,
             "amount": bp.amount,  
-            "qty":1,
+            "qty": 1,
             "delivery_date": today(),
         }]
     })
