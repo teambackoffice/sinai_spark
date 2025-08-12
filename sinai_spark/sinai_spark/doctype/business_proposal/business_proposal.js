@@ -1,4 +1,3 @@
-
 frappe.ui.form.on("Business Proposal", {
 	refresh: function(frm) {
         if (frm.doc.docstatus == 1) {
@@ -13,16 +12,45 @@ frappe.ui.form.on("Business Proposal", {
                 let button = frm.add_custom_button(
                     __(status),
                     function () {
-                        frappe.confirm(
-                            `The status is set to "${status}". Do you want to Send E-mail?`,
-                            function() {
+                        // Custom dialog with Yes/No buttons
+                        let dialog = new frappe.ui.Dialog({
+                            title: __('Change Status'),
+                            fields: [
+                                {
+                                    fieldtype: 'HTML',
+                                    fieldname: 'status_message',
+                                    options: `<p>The status will be set to "<strong>${status}</strong>".</p>
+                                             <p>Do you want to send an email notification?</p>`
+                                }
+                            ],
+                            primary_action_label: __('Yes'),
+                            primary_action: function() {
+                                // Yes button - Change status and send email
                                 frm.set_value("status", status);
                                 statusHistory.add(status);
                                 frm.set_value("status_history", Array.from(statusHistory).join(", "));
-                                frm.save();
-                                updateButtonColors();
+                                frm.save().then(() => {
+                                    updateButtonColors();
+                                    // Call the change function with email flag
+                                    changeStatus(frm, true);
+                                });
+                                dialog.hide();
+                            },
+                            secondary_action_label: __('No'),
+                            secondary_action: function() {
+                                // No button - Change status only, no email
+                                frm.set_value("status", status);
+                                statusHistory.add(status);
+                                frm.set_value("status_history", Array.from(statusHistory).join(", "));
+                                frm.save().then(() => {
+                                    updateButtonColors();
+                                    // Call the change function without email flag
+                                    changeStatus(frm, false);
+                                });
+                                dialog.hide();
                             }
-                        );
+                        });
+                        dialog.show();
                     },
                     __("Change Status")
                 );
@@ -58,7 +86,7 @@ frappe.ui.form.on("Business Proposal", {
                             new_item.uom = item.uom;
                             new_item.qty = item.qty;
                             new_item.item_name = item.item_name;
-                            new_item.rate =item.amount;
+                            new_item.rate = item.amount;
                             // Copy other necessary fields here if needed
                         });
                         frappe.set_route('Form', doc.doctype, doc.name);
@@ -67,62 +95,8 @@ frappe.ui.form.on("Business Proposal", {
             } 
         } 
 
-
-
-        frm.add_custom_button(__('Pending'), function() {
-            frappe.confirm(
-                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
-                function() {
-                    frm.set_value('status', 'Pending').then(function() {
-                        change(frm);
-                    });
-                }
-            );
-        }, __("Change Status"));
-        
-        frm.add_custom_button(__('Proposal Sent'), function() {
-            frappe.confirm(
-                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
-                function() {
-                    frm.set_value('status', 'Proposal Sent').then(function(){
-                        change(frm);
-                    });
-                }
-            );
-        }, __("Change Status"));
-        
-        frm.add_custom_button(__('Under Negotiation'), function() {
-            frappe.confirm(
-                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
-                function() {
-                    frm.set_value('status', 'Under Negotiation').then(function(){
-                        change(frm);
-                    });
-                }
-            );
-        }, __("Change Status"));
-        
-        frm.add_custom_button(__('Completed'), function() {
-            frappe.confirm(
-                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
-                function() {
-                    frm.set_value('status', 'Completed').then(function(){
-                        change(frm);
-                    });
-                }
-            );
-        }, __("Change Status"));
-        
-        frm.add_custom_button(__('Rejected'), function() {
-            frappe.confirm(
-                `The status is set to "${frm.doc.status}". Do you want to Send E-mail?`,
-                function() {
-                    frm.set_value('status', 'Rejected').then(function(){
-                        change(frm);
-                    });
-                }
-            );
-        }, __("Change Status"));
+        // Remove the duplicate status change buttons (the ones below)
+        // Keep only the enhanced ones above
 
         if (frm.doc.status === "Completed") {  // Check status, not docstatus
             frm.add_custom_button(__('Create Sales Order'), function() {
@@ -268,7 +242,7 @@ frappe.ui.form.on("Business Proposal", {
             frappe.call({
                 method: 'sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_amount_in_words',
                 args: {
-                    amount: frm.doc.total_amount,// Ensure you have a currency field
+                    amount: frm.doc.total_amount,
                 },
                 callback: function(r) {
                     if (r.message) {
@@ -280,67 +254,60 @@ frappe.ui.form.on("Business Proposal", {
             frm.set_value('amount_in_words', '');
         }
     }
-
-    
-   
 });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-function change(frm) {
-    console.log("11111111111111111111111111111111111111111");
+// Modified change function to accept send_email parameter
+function changeStatus(frm, send_email = true) {
+    console.log("Status change function called with send_email:", send_email);
     var status = frm.doc.status;
     console.log("Status:", status);
 
-    if (status === "Completed"|| "Proposal Sending") {
-        
+    if (status === "Completed" || status === "Proposal Sent") {
         frappe.call({
             method: "sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_status",
             args: {
                 status: status,
-                docname: frm.docname  // Pass the document name as well
+                docname: frm.docname,
+                send_email: send_email  // Pass the email flag
             },
             callback: function(r) {
                 console.log("Callback response:", r);
                 if (r.message) {
-
-                    // frappe.msgprint(__("Status updated successfully"));
-                // } else {
-                //     frappe.msgprint(__("Failed to update status"));
+                    if (send_email) {
+                        frappe.msgprint(__("Status updated and email sent successfully"));
+                    } else {
+                        frappe.msgprint(__("Status updated successfully "));
+                    }
                 }
             }
         });
     }
-    if (status === "Pending" || "Under Negotiation" || "Rejected") {
-        
+    
+    if (status === "Pending" || status === "Under Negotiation" || status === "Rejected") {
         frappe.call({
             method: "sinai_spark.sinai_spark.doctype.business_proposal.business_proposal.get_change",
             args: {
                 status: status,
-                docname: frm.docname  // Pass the document name as well
+                docname: frm.docname,
+                send_email: send_email  // Pass the email flag
             },
             callback: function(r) {
                 console.log("Callback response:", r);
                 if (r.message) {
-
-                    // frappe.msgprint(__("Status updated successfully"));
-                // } else {
-                //     frappe.msgprint(__("Failed to update status"));
+                    if (send_email) {
+                        frappe.msgprint(__("Status updated and email sent successfully"));
+                    } else {
+                        frappe.msgprint(__("Status updated successfully"));
+                    }
                 }
             }
         });
     }
 }
 
-
 frappe.ui.form.on("Business Proposal Item", {
-    // refresh: function(frm) {
-    //     if (frm.doc.docstatus === 1 && frm.doc.status !== 'Under Negotiation') {
-    //         frm.fields_dict['business_proposal_item'].grid.get_field('amount').df.read_only = 1;
-    //         frm.refresh_field('business_proposal_item');
-    //     }
-    // },
     item: function(frm, cdt, cdn) {
         console.log("Item selected");
         var d = locals[cdt][cdn];
@@ -364,16 +331,11 @@ frappe.ui.form.on("Business Proposal Item", {
         var amount=0;
         frm.doc.business_proposal_item.forEach(function(d) {
             amount+=d.amount;
-            
         });
         frm.set_value('total_amount',amount);
         frm.refresh_field("total_amount")
-       
     },
 });
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 
 frappe.ui.form.on("Business Proposal Item","business_proposal_item_remove",function(frm,cdt,cdn){
 	var d=locals[cdt][cdn];
