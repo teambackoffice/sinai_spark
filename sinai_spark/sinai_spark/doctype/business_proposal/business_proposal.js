@@ -1,6 +1,6 @@
 frappe.ui.form.on("Business Proposal", {
 	refresh: function(frm) {
-        if (frm.doc.docstatus == 1) {
+        if (frm.doc.docstatus == 0 || frm.doc.docstatus == 1) { 
             const statuses = [
                 "Pending", "Proposal Sent", "Under Negotiation", "Rejected", "Completed"
             ];
