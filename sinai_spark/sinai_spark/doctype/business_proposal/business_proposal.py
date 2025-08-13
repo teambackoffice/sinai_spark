@@ -2,16 +2,47 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import money_in_words
 from frappe.utils import today
+from frappe.utils.file_manager import get_file_path
+import os
 
 class BusinessProposal(Document):
+    def before_save(self):
+        if self.amended_from and not frappe.db.exists("Business Proposal", self.amended_from):
+            self.amended_from = None
+    
+    def copy_attachments_from_amended_from(self):
+        if not self.amended_from:
+            return
+        
+        attachments = frappe.get_all("File",
+            filters={
+                "attached_to_doctype": self.doctype,
+                "attached_to_name": self.amended_from
+            },
+            fields=["name", "file_name", "file_url", "is_private"]
+        )
+        
+        for attachment in attachments:
+            if attachment.file_url:
+                file_path = get_file_path(attachment.file_url)
+                
+                if os.path.exists(file_path):
+                    file_doc = frappe.get_doc("File", attachment.name)
+                    new_file = frappe.copy_doc(file_doc)
+                    new_file.attached_to_name = self.name
+                    new_file.save(ignore_permissions=True)
+                else:
+                    frappe.log_error(f"File not found during amendment: {file_path}")
+
     def on_cancel(self):
         if self.enquiry:
             frappe.db.sql("""UPDATE `tabEnquiry` SET status = 'To Consultant' WHERE name = %s""", self.enquiry)
             frappe.db.commit()
             self.reload()
 
-        if self.consultating:
-            frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", self.consultating)
+        consultating = self.get('consultating')
+        if consultating:
+            frappe.db.sql("""UPDATE `tabConsultanting` SET status = 'Proposal Sending' WHERE name = %s""", consultating)
             frappe.db.commit()
             self.reload()
 
