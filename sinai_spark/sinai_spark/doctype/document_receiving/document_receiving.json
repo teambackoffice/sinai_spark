@@ -68,6 +68,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "mandatory_depends_on": "eval:doc.customer",
    "options": "Customer"
@@ -244,7 +245,7 @@
    "link_fieldname": "document_receiving"
   }
  ],
- "modified": "2025-08-11 14:52:31.109167",
+ "modified": "2025-08-16 10:26:41.990447",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Document Receiving",
