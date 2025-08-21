@@ -33,6 +33,7 @@
   "cr_issuing",
   "cr_issuing_details",
   "amended_from",
+  "cr_expired_date",
   "section_break_falg",
   "items",
   "reference_details_section",
@@ -266,6 +267,12 @@
    "fieldtype": "Small Text",
    "label": "Address",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.cr_issuing==1",
+   "fieldname": "cr_expired_date",
+   "fieldtype": "Date",
+   "label": "CR Expired Date"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -276,7 +283,7 @@
    "link_fieldname": "custom_company_formation"
   }
  ],
- "modified": "2025-08-11 14:51:30.268519",
+ "modified": "2025-08-21 12:31:27.888509",
  "modified_by": "Administrator",
  "module": "Sinai Spark",
  "name": "Company Formation",
